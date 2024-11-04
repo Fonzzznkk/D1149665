@@ -10,6 +10,7 @@ myapp/urls.py 是URL配置
 安裝xampp
 需要用到apache和mysql
 
+下載整個software資料夾
 mysite>setting.py
 以下要改成自己的資料庫設定
 DATABASES = {
