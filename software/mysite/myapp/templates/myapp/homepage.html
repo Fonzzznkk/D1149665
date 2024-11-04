@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>選課系統</title>
+    <style>
+        /* 全局設置 */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        
+        /* 頂部欄設置 */
+        .header {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #333;
+        }
+        
+        /* 按鈕設置 */
+        .container {
+            text-align: center;
+        }
+        
+        .button {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 帳號名稱顯示 -->
+    <div class="header">
+        目前帳號：<span id="username">{{ name }}</span>
+    </div>
+
+    <!-- 按鈕區塊 -->
+    <div class="container">
+        <button  id="curriculum-button" type="button">已選課表</button>
+        <button  id="coursesearch-button" type="button">課程查詢</button>
+        
+    </div>
+    <script>
+        // 當頁面載入時彈出提醒
+        
+        window.onload = function() {
+            alert("選課系統將在11/30關閉");
+        };
+        $('#coursesearch-button').click(function (event) {
+            event.preventDefault();  // 阻止默認表單提交
+
+            // 發送 POST 請求，將 uid 和 name 從 session 發送到 views
+            $.ajax({
+                url: '/myapp/coursesearch/',  // 指定發送的 URL
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'  // CSRF Token
+                },
+                success: function (data) {
+                    // 檢查返回的結果並重定向
+                    if (data.status) {
+                        window.location.href = "/myapp/coursesearch/";
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function () {
+                    alert("請求發生錯誤，請重試！");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

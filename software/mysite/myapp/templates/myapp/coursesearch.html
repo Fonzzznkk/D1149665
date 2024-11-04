@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課程搜尋</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+        .search-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4a4a4a;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            font-size: 1em;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results-container {
+            margin-top: 20px;
+        }
+        .course-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h2>課程搜尋</h2>
+        <form id="searchForm">
+            <label for="name">課程名稱</label>
+            <input type="text" id="name" name="name" placeholder="輸入課程名稱">
+
+            <label for="course_code">課程代碼</label>
+            <input type="text" id="course_code" name="course_code" placeholder="輸入課程代碼">
+
+            <label for="department">開課系所</label>
+            <input type="text" id="department" name="department" placeholder="輸入開課系所">
+
+            <label for="time">修課時段</label>
+            <input type="text" id="time" name="time" placeholder="輸入修課時段">
+
+            <label for="teacher">授課教師</label>
+            <input type="text" id="teacher" name="teacher" placeholder="輸入授課教師">
+
+            <label for="language">授課語言</label>
+            <input type="text" id="language" name="language" placeholder="輸入授課語言">
+
+            <label for="type">課程種類</label>
+            <input type="text" id="type" name="type" placeholder="輸入課程種類">
+
+            <button type="button" onclick="searchCourses()">搜尋</button>
+        </form>
+        
+        <div class="results-container" id="resultsContainer"></div>
+    </div>
+
+    <script>
+        function searchCourses() {
+            const formData = new FormData(document.getElementById("searchForm"));
+            const query = new URLSearchParams(formData).toString();
+            
+            // 使用 AJAX 發送請求
+            fetch(`/myapp/search_courses?${query}`)
+                .then(response => response.json())
+                .then(data => displayResults(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function displayResults(courses) {
+            const resultsContainer = document.getElementById("resultsContainer");
+            resultsContainer.innerHTML = ""; // 清空舊的結果
+            
+            if (courses.length === 0) {
+                resultsContainer.innerHTML = "<p>沒有符合條件的課程。</p>";
+            } else {
+                courses.forEach(course => {
+                    const courseItem = document.createElement("div");
+                    courseItem.classList.add("course-item");
+                    courseItem.innerHTML = `
+                        <strong>課程名稱：</strong> ${course.name} <br>
+                        <strong>課程代碼：</strong> ${course.course_code} <br>
+                        <strong>開課系所：</strong> ${course.department} <br>
+                        <strong>修課時段：</strong> ${course.time} <br>
+                        <strong>授課教師：</strong> ${course.teacher} <br>
+                        <strong>授課語言：</strong> ${course.language} <br>
+                        <strong>課程種類：</strong> ${course.type}
+                    `;
+                    resultsContainer.appendChild(courseItem);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
