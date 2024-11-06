@@ -38,54 +38,60 @@
 
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>選課系統 登入頁面</title>
+    <title> 選課系統登入頁面 </title>
     <style>
+        /*全域樣式*/
         body {
-            font-family: 'Arial', sans-serif;
             background-color: white;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
             margin: 0;
         }
-
-        .login-container {
-            background-color: white;
-            border-radius: 8px;
-            border-collapse: collapse;
-            border: solid;
-            padding: 40px;
-            /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);*/
-            width: 300px;
-            text-align: center;
+        /*頁首樣式*/
+        .login-header {
+            background: linear-gradient(to right, #80bdff, #007bff);
+            height: 100px;
+            display: flex;
         }
-
-        h1 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
+        .login-header h1 {
+            margin-right: 30px;
+            margin-left: auto;
+            color: white;
+            justify-content: center;
+        }
+        /*頁中樣式*/
+        .login-container {
+            display: flex;
+        }
+        /*登入框樣式*/
+        .login-form {
+            background-color: white;
+            border: solid;
+            border-collapse: collapse;
+            border-radius: 8px;
+            margin-right: auto;
+            margin-left: 30px;
+            width: 300px;
+            padding: 40px;
+        }
+        .login-form h1 {
+            text-align: center;
+            font-size: 30px;
             color: gray;
         }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px 0;
-            margin: 10px 0;
-            border: 1px solid #cccccc;
+        .login-form input {
+            border: 2px solid lightgray;
             border-radius: 5px;
-            font-size: 1em;
-            transition: border-color 0.3s;
+            width: 275px;
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px 0;
+            transition: border 0.3s;
         }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus {
+        .login-form input:focus {
             border-color: black;
             outline: none;
         }
-
-        button {
+        .login-form button {
             width: 100%;
             padding: 10px;
             background-color: #007bff;
@@ -96,29 +102,70 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-
-        button:hover {
+        .login-form button:hover {
             background-color: #0056b3;
         }
+        /*注意事項樣式*/
+        .login-announcement {
+            background-color: white;
+            border-radius: 8px;
+            border-collapse: collapse;
+            border: solid;
+            width: 800px;
+            margin-right: 30px;
+            margin-left: auto;
+        }
+        .login-announcement h1 {
+            text-align: center;
+            color: gray;
+        }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 0.8em;
-            color: #777;
+        .login-footer {
+            text-align: center;
+            font-size: 12px;
+            color: gray;
+            margin-top: 200px;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1> 登入選課系統 </h1>
-        <form method="POST" action="/myapp/login/">
-            {% csrf_token %}
-            <input type="text" name="studentid" id="uid" placeholder=" 學號" required>
-            <input type="password" name="password"  id="pwd" placeholder=" 密碼" required>
-            <button id="login-button" type="submit"> <b> 登入 </b> </button>
-        </form>
-        <div class="footer">© 2024 選課系統. 版權所有.</div>
+    <div class="login-header">
+        <h1> 第五組 選課系統 </h1>
     </div>
+    <br>
+    <div class="login-container">
+        <div class="login-form">
+            <h1> 登入系統 </h1>
+            <form method="POST" action="/myapp/login/">
+                {% csrf_token %}
+                <input type="text" name="studentid" id="uid" placeholder="學號" required>
+                <input type="password" name="password"  id="pwd" placeholder="密碼" required>
+                <button id="login-button" type="submit"> <b> 登入 </b> </button>
+            </form>
+        </div>
+        <div class="login-announcement">
+            <h1> 系統操作說明 </h1>
+            <ol>
+                <b><li> 課程資訊 </li></b>
+                <ul>
+                    <li> 課程查詢：請先勾選查詢條件，再輸入查詢字詞 </li>
+                    <li> 課程詳細資訊：點選課程列表中的課程名稱，會導向該課的詳細資訊頁面 </li>
+                </ul>
+                <br>
+                <b><li> 課程加選 </li></b>
+                <ul>
+                    <li> 加選方式：在課程詳細資訊頁面點擊加選按鈕，確認加選會導向已選課表頁面 </li>
+                    <li> 課程衝堂：在已選課表頁面，時段衝突的課程會顯示紅色 </li>
+                </ul>
+                <br>
+                <b><li> 課程退選 </li></b>
+                <ul>
+                    <li> 退選方式：在已選課表頁面點擊課程後點選退選按鈕，確認退選會導回已選課表頁面 </li>
+                </ul>
+            </ol>
+        </div>
+    </div>
+    <div class="login-footer"> © 開發者：軟體工程開發實務第五組　2024/11/07 </div>
     <script>
 
         $('#login-button').click(function () {
@@ -133,7 +180,7 @@
                         xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");    // csrf
                     },
                     success: function (data) {
-                        // data是服务器端返回的字符串
+                        // data是服務器端返回的字符串
                         var dic = JSON.parse(data)
                         if (!dic.status) 
                             alert(JSON.parse(data).msg);
@@ -147,5 +194,3 @@
     </script>
 </body>
 </html>
-
-
