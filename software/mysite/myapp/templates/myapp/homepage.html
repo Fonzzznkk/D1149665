@@ -1,6 +1,42 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/jquery.flexslider.js"></script>
+    <script src="/static/js/jquery.custom.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#btn-blog-next").click(function () {
+                $('#blogCarousel').carousel('next')
+            });
+            $("#btn-blog-prev").click(function () {
+                $('#blogCarousel').carousel('prev')
+            });
+
+            $("#btn-client-next").click(function () {
+                $('#clientCarousel').carousel('next')
+            });
+            $("#btn-client-prev").click(function () {
+                $('#clientCarousel').carousel('prev')
+            });
+
+        });
+
+        $(window).load(function () {
+
+            $('.flexslider').flexslider({
+                animation: "slide",
+                slideshow: true,
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>選課系統</title>
@@ -67,26 +103,47 @@
         window.onload = function() {
             alert("選課系統將在11/30關閉");
         };
-        $('#coursesearch-button').click(function (event) {
+        $('#coursesearch-button').click(function () {
+            
             event.preventDefault();  // 阻止默認表單提交
-
+            
             // 發送 POST 請求，將 uid 和 name 從 session 發送到 views
             $.ajax({
-                url: '/myapp/coursesearch/',  // 指定發送的 URL
+                url: window.location.href,  // 指定發送的 URL
                 type: "POST",
-                data: {
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'  // CSRF Token
+                data: {'type': 'tocoursesearch'},
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");    // csrf
                 },
                 success: function (data) {
-                    // 檢查返回的結果並重定向
-                    if (data.status) {
-                        window.location.href = "/myapp/coursesearch/";
-                    } else {
-                        alert(data.msg);
-                    }
+                    // data是服务器端返回的字符串
+                    var dic = JSON.parse(data)
+                    if (!dic.status) 
+                        alert(JSON.parse(data).msg);
+
+                    else window.location.href = "/myapp/coursesearch/";
+                }
+            });
+        });
+        $('#curriculum-button').click(function () {
+            
+            event.preventDefault();  // 阻止默認表單提交
+            
+            // 發送 POST 請求，將 uid 和 name 從 session 發送到 views
+            $.ajax({
+                url: window.location.href,  // 指定發送的 URL
+                type: "POST",
+                data: {'type': 'tocoursesearch'},
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");    // csrf
                 },
-                error: function () {
-                    alert("請求發生錯誤，請重試！");
+                success: function (data) {
+                    // data是服务器端返回的字符串
+                    var dic = JSON.parse(data)
+                    if (!dic.status) 
+                        alert(JSON.parse(data).msg);
+
+                    else window.location.href = "/myapp/selected_courses/";
                 }
             });
         });
