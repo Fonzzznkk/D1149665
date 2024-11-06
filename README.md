@@ -32,6 +32,7 @@ pip install django
 pip install mysqlclient
 2.2.5似乎會有問題
 要安裝2.2.4
+pip install mysqlclient==2.2.4
 
 開啟方式:
 
