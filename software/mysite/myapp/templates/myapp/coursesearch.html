@@ -13,6 +13,14 @@
             justify-content: center;
             padding-top: 20px;
         }
+        .header {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #333;
+        }
         .search-container {
             background-color: #fff;
             padding: 20px;
@@ -60,6 +68,9 @@
     </style>
 </head>
 <body>
+    <div class="header">
+        目前帳號：<span id="username">{{ name }}</span>
+    </div>
     <div class="search-container">
         <h2>課程搜尋</h2>
         <form id="searchForm">
