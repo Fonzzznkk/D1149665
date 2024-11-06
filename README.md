@@ -34,6 +34,8 @@ pip install mysqlclient
 要安裝2.2.4
 pip install mysqlclient==2.2.4
 
+
+
 開啟方式:
 
 在mysite開啟terminal
