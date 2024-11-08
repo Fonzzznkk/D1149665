@@ -6,6 +6,14 @@
     <!-- 加載 Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        .header {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #333;
+        }
         .container {
             max-width: 800px;
         }
@@ -26,7 +34,9 @@
 <body>
 <div class="container mt-5">
     <h2>課程搜尋</h2>
-
+    <div class="header">
+        目前帳號：<span id="username">{{ name }}</span>
+    </div>
     <!-- 搜尋表單 -->
     <form method="GET" action="{% url 'coursesearch' %}" class="card p-4 mb-4">
         <div class="form-row">
