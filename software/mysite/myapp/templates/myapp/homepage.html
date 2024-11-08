@@ -39,63 +39,67 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>選課系統</title>
+    <title> 選課系統 </title>
     <style>
-        /* 全局設置 */
+        /*全域*/
         body {
+            background-color: white;
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            background-color: #f5f5f5;
         }
-        
-        /* 頂部欄設置 */
-        .header {
-            position: absolute;
-            top: 0;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            color: #333;
+        /*頁首*/
+        .homepage-header {
+            background: linear-gradient(to right, #80bdff, #007bff);
+            height: 100px;
+            display: flex;
         }
-        
-        /* 按鈕設置 */
-        .container {
+        /*頁中*/
+        .homepage-container {
+            display: flex;
+            margin-top: 10px;
+        }
+        /*帳號資訊*/
+        .homepage-account {
+            border: solid gray;
+            border-collapse: collapse;
+            border-radius: 8px;
+            width: 150px;
+            height: 50px;
             text-align: center;
+            margin-right: auto;
+            margin-left: 10px;
         }
-        
-        .button {
-            display: inline-block;
-            margin: 15px;
-            padding: 15px 30px;
-            text-decoration: none;
-            color: #fff;
-            background-color: #4CAF50;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+        /*功能欄*/
+        .homepage-function {
+            margin-right: 10px;
+            margin-left: auto;
         }
-        
-        .button:hover {
-            background-color: #45a049;
+        .homepage-function button {
+            color: white;
+            font-size: 16px;
+            background-color: #007bff;
+            margin: 0px 5px;
+            padding: 15px 15px;
+            border-radius: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .homepage-function button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-
-    <!-- 帳號名稱顯示 -->
-    <div class="header">
-        目前帳號：<span id="username">{{ name }}</span>
+    <div class="homepage-header">
     </div>
-
-    <!-- 按鈕區塊 -->
-    <div class="container">
-        <button  id="curriculum-button" type="button">已選課表</button>
-        <button  id="coursesearch-button" type="button">課程查詢</button>
-        
+    <div class="homepage-container">
+        <div class="homepage-account">
+            <b>目前帳號：<span id="username">{{name}}</span></b>
+        </div>
+        <div class="homepage-function">
+            <button id="curriculum-button" type="button"><b> 已選課表 </b></button>
+            <button id="coursesearch-button" type="button"><b> 課程查詢 </b></button>
+        </div>
     </div>
     <script>
         // 當頁面載入時彈出提醒
