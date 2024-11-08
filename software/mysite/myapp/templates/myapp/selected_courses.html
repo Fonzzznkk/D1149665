@@ -3,26 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>已選課表</title>
+    <title> 已選課表頁面 </title>
     <style>
+        /*全域*/
         body {
+            background-color: white;
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            background-color: #f5f5f5;
         }
+        /*頁首*/
         .header {
-            position: absolute;
-            top: 0;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            color: #333;
+            background: linear-gradient(to right, #80bdff, #007bff);
+            height: 100px;
+            display: flex;
         }
+        /*頁中*/
         .container {
+            display: flex;
+            margin-top: 10px;
+        }
+        /*帳號資訊*/
+        .account {
+            border: solid gray;
+            border-collapse: collapse;
+            border-radius: 8px;
+            width: 200px;
+            height: 100px;
+            text-align: center;
+            margin: 0 10px;
+        }
+        .account p {
+            margin: 5px 0;
+        }
+        /*課程列表*/
+        .course {
+            margin: 0px auto;
             text-align: center;
         }
         .course-list {
@@ -32,40 +47,49 @@
         .course-list li {
             margin: 10px 0;
         }
-        .course-btn {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: #fff;
+        .course-name {
+            color: white;
+            font-size: 16px;
+            background-color: #007bff;
+            padding: 10px 15px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            width: 150px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+            transition: 0.3s;
         }
-        .course-btn:hover {
-            background-color: #45a049;
+        .course-name:hover {
+            background-color: #0056b3;
+        }
+        .course p {
+            font-size: 25px;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        目前帳號：<span id="username">{{ name }}</span>
     </div>
     <div class="container">
-        <h1>已選課表</h1>
-        {% if courses %}
-        <ul class="course-list">
-            {% for course_name, course_id in courses %}
-            <li>
-                <button class="course-btn" onclick="window.location.href='/myapp/course_mydetail/{{ course_id }}'">
-                    {{ course_name }}
-                </button>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>尚未選課</p>
-        {% endif %}
+        <div class="account">
+            <p><b> 目前帳號 </b></p>
+            <b>姓名：<span id="username">{{ name }}</span></b>
+        </div>
+        <div class="course">
+            <h1> 已選課表 </h1>
+            {% if courses %}
+            <ul class="course-list">
+                {% for course_name, course_id in courses %}
+                <li>
+                    <button class="course-name" onclick="window.location.href='/myapp/course_mydetail/{{ course_id }}'">
+                        {{ course_name }}
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p> 尚未選課 </p>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>
