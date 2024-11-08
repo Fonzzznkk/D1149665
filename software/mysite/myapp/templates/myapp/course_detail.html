@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課程詳細資訊</title>
+    <style>
+        /* 基本樣式 */
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .course-container { width: 80%; margin: auto; padding: 20px; }
+        .course-info { margin-bottom: 20px; }
+        .buttons { margin-top: 20px; }
+        .btn { padding: 10px 20px; margin-right: 10px; text-decoration: none; color: white; }
+        .btn-add { background-color: #4CAF50; } /* 綠色 */
+        .btn-drop { background-color: #f44336; } /* 紅色 */
+    </style>
+</head>
+<body>
+
+<div class="course-container">
+    <h1>{{ course.name }}</h1>
+    <div class="course-info">
+        <p><strong>開課系所:</strong> {{ course.department }}</p>
+        <p><strong>上課時間:</strong> {{ course.time }}</p>
+        <p><strong>授課教師:</strong> {{ course.teacher }}</p>
+        <p><strong>授課語言:</strong> {{ course.language }}</p>
+        <p><strong>課程類型:</strong> {{ course.type }}</p>
+        <p><strong>課程資訊:</strong> {{ course.information }}</p>
+    </div>
+    <div class="buttons">
+        <a href="{% url 'add_course' course.id %}" class="btn btn-add">加選</a>
+        <a href="{% url 'drop_course' course.id %}" class="btn btn-drop">退選</a>
+        
+      
+    </div>
+</div>
+
+</body>
+</html>

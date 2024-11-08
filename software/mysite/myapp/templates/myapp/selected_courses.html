@@ -31,10 +31,19 @@
         }
         .course-list li {
             margin: 10px 0;
-            padding: 10px;
+        }
+        .course-btn {
+            padding: 10px 20px;
             background-color: #4CAF50;
             color: #fff;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        .course-btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -44,16 +53,19 @@
     </div>
     <div class="container">
         <h1>已選課表</h1>
-        {% if course_names %}
-            <ul class="course-list">
-                {% for course_name in course_names %}
-                    <li>{{ course_name }}</li>
-                {% endfor %}
-            </ul>
+        {% if courses %}
+        <ul class="course-list">
+            {% for course_name, course_id in courses %}
+            <li>
+                <button class="course-btn" onclick="window.location.href='/myapp/course_mydetail/{{ course_id }}'">
+                    {{ course_name }}
+                </button>
+            </li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>尚未選課</p>
+        <p>尚未選課</p>
         {% endif %}
     </div>
-
 </body>
 </html>
