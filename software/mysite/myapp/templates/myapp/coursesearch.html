@@ -114,7 +114,7 @@
                             修課時段: {{ item.course.time }}
                         </div>
                         <!-- 詳細資訊按鈕 -->
-                        <button class="course-btn">
+                        <button class="course-btn"onclick="window.location.href='/myapp/course_mydetail/{{ item.course_code }}'">
                            詳細資訊
                         </button>
                     </li>
