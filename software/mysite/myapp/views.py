@@ -5,7 +5,7 @@ from django.http import HttpResponse
 import os
 from django.shortcuts import render, redirect, redirect
 import json
-from .models import Student,Curriculum
+from .models import Student,Curriculum,Course
 from django.http import JsonResponse
 
 
@@ -67,17 +67,71 @@ def homepage(request):
         pass
     
 
-
+from django.shortcuts import render, redirect
+from .models import Course
 
 def coursesearch(request):
-   
     uid = request.session.get('uid')
     name = request.session.get('name')
+
     if uid and name:
         if request.method == 'GET':
-            return render(request, 'myapp/coursesearch.html',{'name': name})
+            # 獲取所有查詢條件
+            course_name = request.GET.get('course_name', '')
+            course_code = request.GET.get('course_code', '')
+            department = request.GET.get('department', '')
+            time = request.GET.get('time', '')
+            teacher = request.GET.get('teacher', '')
+            language = request.GET.get('language', '')
+            course_type = request.GET.get('course_type', '')
+
+            # 根據選中的條件篩選課程資料
+            courses = Course.objects.all()
+
+            if request.GET.get('search_name') and course_name:
+                courses = courses.filter(name__icontains=course_name)  # 模糊查詢課程名稱
+            if request.GET.get('search_code') and course_code:
+                courses = [course for course in courses if str(course.id).startswith(course_code)]  # 部分匹配課程代碼
+            if request.GET.get('search_department') and department:
+                courses = courses.filter(department__icontains=department)  # 模糊查詢開課系所
+            if request.GET.get('search_time') and time:
+                courses = courses.filter(time__icontains=time)  # 模糊查詢修課時段
+            if request.GET.get('search_teacher') and teacher:
+                courses = courses.filter(teacher__icontains=teacher)  # 模糊查詢授課教師
+            if request.GET.get('search_language') and language:
+                courses = courses.filter(language__icontains=language)  # 模糊查詢授課語言
+            if request.GET.get('search_type') and course_type:
+                courses = courses.filter(type__icontains=course_type)  # 模糊查詢課程種類
+
+            # 準備將課程和生成的課程代碼一起傳遞到模板
+            courses_with_code = [
+                {
+                    'course': course,
+                    'course_code': f"{course.id}"  # 生成課程代碼
+                }
+                for course in courses
+            ]
+
+            # 傳遞結果到模板
+            return render(request, 'myapp/coursesearch.html', {
+                'name': name,
+                'courses_with_code': courses_with_code,
+                'course_name': course_name,
+                'course_code': course_code,
+                'department': department,
+                'time': time,
+                'teacher': teacher,
+                'language': language,
+                'course_type': course_type
+            })
     else:
         return redirect('/myapp/login/')  # 未登入的用戶重定向到登入頁面
+
+
+
+
+
+
 
     
     

@@ -79,9 +79,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Course_selection_system',     # 創建的資料庫名稱
         'USER': 'root',           # 默認 MySQL 用戶名（XAMPP 默認是 root）
-        'PASSWORD': 'Kkk51550',           # XAMPP 默認 root 密碼是空的
+        'PASSWORD': '',           # XAMPP 默認 root 密碼是空的
         'HOST': '',      # 使用本地伺服器
-        'PORT': '3307',           # MySQL 預設端口
+        'PORT': '3306',           # MySQL 預設端口
     }
 }
 

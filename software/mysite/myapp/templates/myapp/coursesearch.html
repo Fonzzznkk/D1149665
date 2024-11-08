@@ -2,140 +2,131 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>課程搜尋</title>
+    <!-- 加載 Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            padding-top: 20px;
+        .container {
+            max-width: 800px;
         }
-        .header {
-            position: absolute;
-            top: 0;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            color: #333;
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .search-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px;
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #4a4a4a;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 8px;
-            font-size: 1em;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
+        .card-header, .btn-primary {
             background-color: #007bff;
             color: #fff;
-            cursor: pointer;
-            transition: background 0.3s;
         }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .results-container {
-            margin-top: 20px;
-        }
-        .course-item {
-            background-color: #f9f9f9;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 10px;
+        h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        目前帳號：<span id="username">{{ name }}</span>
-    </div>
-    <div class="search-container">
-        <h2>課程搜尋</h2>
-        <form id="searchForm">
-            <label for="name">課程名稱</label>
-            <input type="text" id="name" name="name" placeholder="輸入課程名稱">
+<div class="container mt-5">
+    <h2>課程搜尋</h2>
 
-            <label for="course_code">課程代碼</label>
-            <input type="text" id="course_code" name="course_code" placeholder="輸入課程代碼">
+    <!-- 搜尋表單 -->
+    <form method="GET" action="{% url 'coursesearch' %}" class="card p-4 mb-4">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <div class="form-check">
+                    <input type="checkbox" name="search_name" class="form-check-input" id="search_name" 
+                           {% if request.GET.search_name %}checked{% endif %}>
+                    <label class="form-check-label" for="search_name">搜尋課程名稱</label>
+                </div>
+                <input type="text" name="course_name" class="form-control" value="{{ course_name }}" placeholder="課程名稱">
+            </div>
 
-            <label for="department">開課系所</label>
-            <input type="text" id="department" name="department" placeholder="輸入開課系所">
+            <div class="col-md-6 mb-3">
+                <div class="form-check">
+                    <input type="checkbox" name="search_code" class="form-check-input" id="search_code"
+                           {% if request.GET.search_code %}checked{% endif %}>
+                    <label class="form-check-label" for="search_code">搜尋課程代碼</label>
+                </div>
+                <input type="text" name="course_code" class="form-control" value="{{ course_code }}" placeholder="課程代碼">
+            </div>
 
-            <label for="time">修課時段</label>
-            <input type="text" id="time" name="time" placeholder="輸入修課時段">
+            <div class="col-md-6 mb-3">
+                <div class="form-check">
+                    <input type="checkbox" name="search_department" class="form-check-input" id="search_department"
+                           {% if request.GET.search_department %}checked{% endif %}>
+                    <label class="form-check-label" for="search_department">搜尋開課系所</label>
+                </div>
+                <input type="text" name="department" class="form-control" value="{{ department }}" placeholder="開課系所">
+            </div>
 
-            <label for="teacher">授課教師</label>
-            <input type="text" id="teacher" name="teacher" placeholder="輸入授課教師">
+            <div class="col-md-6 mb-3">
+                <div class="form-check">
+                    <input type="checkbox" name="search_time" class="form-check-input" id="search_time"
+                           {% if request.GET.search_time %}checked{% endif %}>
+                    <label class="form-check-label" for="search_time">搜尋修課時段</label>
+                </div>
+                <input type="text" name="time" class="form-control" value="{{ time }}" placeholder="修課時段">
+            </div>
 
-            <label for="language">授課語言</label>
-            <input type="text" id="language" name="language" placeholder="輸入授課語言">
+            <div class="col-md-6 mb-3">
+                <div class="form-check">
+                    <input type="checkbox" name="search_teacher" class="form-check-input" id="search_teacher"
+                           {% if request.GET.search_teacher %}checked{% endif %}>
+                    <label class="form-check-label" for="search_teacher">搜尋授課教師</label>
+                </div>
+                <input type="text" name="teacher" class="form-control" value="{{ teacher }}" placeholder="授課教師">
+            </div>
 
-            <label for="type">課程種類</label>
-            <input type="text" id="type" name="type" placeholder="輸入課程種類">
+            <div class="col-md-6 mb-3">
+                <div class="form-check">
+                    <input type="checkbox" name="search_language" class="form-check-input" id="search_language"
+                           {% if request.GET.search_language %}checked{% endif %}>
+                    <label class="form-check-label" for="search_language">搜尋授課語言</label>
+                </div>
+                <input type="text" name="language" class="form-control" value="{{ language }}" placeholder="授課語言">
+            </div>
 
-            <button type="button" onclick="searchCourses()">搜尋</button>
-        </form>
+            <div class="col-md-6 mb-3">
+                <div class="form-check">
+                    <input type="checkbox" name="search_type" class="form-check-input" id="search_type"
+                           {% if request.GET.search_type %}checked{% endif %}>
+                    <label class="form-check-label" for="search_type">搜尋課程種類</label>
+                </div>
+                <input type="text" name="course_type" class="form-control" value="{{ course_type }}" placeholder="課程種類">
+            </div>
+        </div>
         
-        <div class="results-container" id="resultsContainer"></div>
-    </div>
+        <button type="submit" class="btn btn-primary">搜尋</button>
+    </form>
 
-    <script>
-        function searchCourses() {
-            const formData = new FormData(document.getElementById("searchForm"));
-            const query = new URLSearchParams(formData).toString();
-            
-            // 使用 AJAX 發送請求
-            fetch(`/myapp/search_courses?${query}`)
-                .then(response => response.json())
-                .then(data => displayResults(data))
-                .catch(error => console.error('Error:', error));
-        }
+    <!-- 搜尋結果 -->
+    {% if courses_with_code %}
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">搜尋結果</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for item in courses_with_code %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>{{ item.course_code }}</strong>: {{ item.course.name }} - {{ item.course.department }}
+                            <br>
+                            授課教師: {{ item.course.teacher }}, 授課語言: {{ item.course.language }}
+                            <br>
+                            修課時段: {{ item.course.time }}
+                        </div>
+                        <!-- 詳細資訊按鈕 -->
+                        <button class="course-btn">
+                           詳細資訊
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p class="text-center text-muted">未找到符合條件的課程。</p>
+    {% endif %}
+</div>
 
-        function displayResults(courses) {
-            const resultsContainer = document.getElementById("resultsContainer");
-            resultsContainer.innerHTML = ""; // 清空舊的結果
-            
-            if (courses.length === 0) {
-                resultsContainer.innerHTML = "<p>沒有符合條件的課程。</p>";
-            } else {
-                courses.forEach(course => {
-                    const courseItem = document.createElement("div");
-                    courseItem.classList.add("course-item");
-                    courseItem.innerHTML = `
-                        <strong>課程名稱：</strong> ${course.name} <br>
-                        <strong>課程代碼：</strong> ${course.course_code} <br>
-                        <strong>開課系所：</strong> ${course.department} <br>
-                        <strong>修課時段：</strong> ${course.time} <br>
-                        <strong>授課教師：</strong> ${course.teacher} <br>
-                        <strong>授課語言：</strong> ${course.language} <br>
-                        <strong>課程種類：</strong> ${course.type}
-                    `;
-                    resultsContainer.appendChild(courseItem);
-                });
-            }
-        }
-    </script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
