@@ -157,4 +157,5 @@ def selected_courses_view(request):
     
     # 將課程名稱列表傳遞到模板中
     return render(request, 'myapp/selected_courses.html', {'course_names': course_names, 'name': student.name})
+#fesgse
 
