@@ -18,6 +18,7 @@ class Course(models.Model):
     teacher = models.CharField(max_length=100, verbose_name="授課教師")
     language = models.CharField(max_length=50, verbose_name="授課語言")
     type = models.CharField(max_length=50, verbose_name="課程類型")
+    information = models.CharField(max_length=5000, verbose_name="課程資訊")
 
     def __str__(self):
         return f"{self.name} - {self.department}"

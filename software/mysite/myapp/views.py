@@ -3,9 +3,9 @@
 # Create your views here.
 from django.http import HttpResponse
 import os
-from django.shortcuts import render, redirect, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import json
-from .models import Student,Curriculum
+from .models import Student,Curriculum,Course
 from django.http import JsonResponse
 
 
@@ -95,13 +95,64 @@ def selected_courses_view(request):
         # 查找 Curriculum 表中該學生的所有課程
         curriculum_entries = Curriculum.objects.filter(student_id=student.id)
         
-        # 從 Curriculum 表中取得所有課程對應的課程名稱
-        course_names = [entry.course_id.name for entry in curriculum_entries]
+        # 從 Curriculum 表中取得每個課程的名稱和 ID
+        courses = [(entry.course_id.name, entry.course_id.id) for entry in curriculum_entries]
         
     except Student.DoesNotExist:
         return HttpResponse("學生不存在")
     
-    # 將課程名稱列表傳遞到模板中
-    return render(request, 'myapp/selected_courses.html', {'course_names': course_names, 'name': student.name})
-#fesgse
+    # 將課程名稱和 ID 列表傳遞到模板中
+    return render(request, 'myapp/selected_courses.html', {'courses': courses, 'name': student.name})
+
+
+
+def course_detail(request, course_id):
+    # 根據 URL 中的 course_id 從資料庫中獲取對應的課程
+    course = get_object_or_404(Course, id=course_id)
+    
+    # 將課程資料傳遞給模板
+    return render(request, 'myapp/course_detail.html', {'course': course})
+
+
+def add_course(request, course_id):
+    # 從 session 中取得學生的 uid
+    uid = request.session.get('uid')
+    if not uid:
+        return HttpResponse("請先登入")  # 若未登入，返回提示訊息
+
+    # 查找學生和課程的記錄
+    student = get_object_or_404(Student, student_id=uid)
+    course = get_object_or_404(Course, id=course_id)
+
+    # 檢查是否已經有該課程的記錄，若無則添加
+    curriculum_entry, created = Curriculum.objects.get_or_create(student_id=student, course_id=course)
+    
+    if created:
+        message = "成功加選課程"
+    else:
+        message = "課程已加選，無需重複操作"
+    
+    return HttpResponse(message)
+
+
+def drop_course(request, course_id):
+    # 從 session 中取得學生的 uid
+    uid = request.session.get('uid')
+    if not uid:
+        return HttpResponse("請先登入")  # 若未登入，返回提示訊息
+
+    # 查找學生和課程的記錄
+    student = get_object_or_404(Student, student_id=uid)
+    course = get_object_or_404(Course, id=course_id)
+
+    # 嘗試刪除該課程的記錄，若不存在則忽略
+    curriculum_entry = Curriculum.objects.filter(student_id=student, course_id=course)
+    
+    if curriculum_entry.exists():
+        curriculum_entry.delete()
+        message = "成功退選課程"
+    else:
+        message = "未選此課程，無法退選"
+    
+    return HttpResponse(message)
 
