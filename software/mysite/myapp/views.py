@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 import json
 from .models import Student,Curriculum,Course
 from django.http import JsonResponse
-
+from collections import defaultdict
 
 def hello_world(request):
     return HttpResponse("Hello, world!")
@@ -131,32 +131,62 @@ def coursesearch(request):
 
 
 
-
-
-    
-    
 def selected_courses_view(request):
-    # 從 session 中取得學生的 uid
     uid = request.session.get('uid')
     name = request.session.get('name')
+    
+    # 若沒有 uid，返回提示訊息
     if not uid:
-        return HttpResponse("請先登入")  # 若沒有 uid，返回提示訊息
+        return HttpResponse("請先登入")  
     
     try:
-        # 根據 student_id 查找 Student 記錄
+        # 獲取當前學生
         student = Student.objects.get(student_id=uid)
-        
-        # 查找 Curriculum 表中該學生的所有課程
+        # 獲取學生的所有課程
         curriculum_entries = Curriculum.objects.filter(student_id=student.id)
+        # 將課程名稱和時間分別存入列表中
+        courses = [(entry.course_id.name, entry.course_id.time) for entry in curriculum_entries]
         
-        # 從 Curriculum 表中取得每個課程的名稱和 ID
-        courses = [(entry.course_id.name, entry.course_id.id) for entry in curriculum_entries]
+        # 初始化字典來存儲課表資料
+        timetable = defaultdict(lambda: [''] * 13)  # 每天有 13 節課
+
+        # 解析時間並將課程分配到 timetable
+        for course_name, time in courses:
+            # 假設時間格式為 "(一)06(一)07"
+            time_slots = time.split('(')
+            for time_slot in time_slots:
+                if time_slot:
+                    try:
+                        # 拆解為星期和節次
+                        day, period = time_slot.split(')')
+                        day = day.strip()
+                        period = int(period.strip()) - 1  # 將 period 轉為索引
+                        
+                        if day in ['一', '二', '三', '四', '五', '六', '日'] and 0 <= period < 13:
+                            # 填入課程名稱至對應的星期和節次中
+                            timetable[day][period] = course_name
+                        else:
+                            print(f"Warning: Invalid day or period for course '{course_name}': '{time_slot}'")
+                    except ValueError:
+                        print(f"Warning: Invalid time format for course '{course_name}': '{time_slot}'")
+        
+        # 設定星期的順序
+        days_of_week = ['一', '二', '三', '四', '五', '六', '日']
         
     except Student.DoesNotExist:
         return HttpResponse("學生不存在")
-    
-    # 將課程名稱和 ID 列表傳遞到模板中
-    return render(request, 'myapp/selected_courses.html', {'courses': courses, 'name': student.name})
+
+    # 生成節次列表
+    periods = list(range(1, 14))
+
+    # 渲染模板
+    return render(request, 'myapp/selected_courses.html', {
+        'timetable': timetable,
+        'name': student.name,
+        'days_of_week': days_of_week,
+        'periods': periods
+    })
+
 
 
 
