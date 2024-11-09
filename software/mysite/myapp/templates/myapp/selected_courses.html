@@ -1,95 +1,119 @@
+{% load custom_filters %}
+
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 已選課表頁面 </title>
+    <title>{{ name }} 的已選課程</title>
     <style>
-        /*全域*/
+        /* 整體樣式 */
         body {
-            background-color: white;
             font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin: 0;
+            padding: 20px;
         }
-        /*頁首*/
-        .header {
-            background: linear-gradient(to right, #80bdff, #007bff);
-            height: 100px;
-            display: flex;
+
+        h1 {
+            font-size: 24px;
+            color: #4a90e2;
+            margin-bottom: 20px;
         }
-        /*頁中*/
-        .container {
-            display: flex;
-            margin-top: 10px;
-        }
-        /*帳號資訊*/
-        .account {
-            border: solid gray;
+
+        /* 表格樣式 */
+        table {
+            width: 100%;
+            max-width: 800px;
             border-collapse: collapse;
-            border-radius: 8px;
-            width: 200px;
-            height: 100px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
             text-align: center;
-            margin: 0 10px;
+            font-size: 14px;
         }
-        .account p {
-            margin: 5px 0;
+
+        th {
+            background-color: #4a90e2;
+            color: #fff;
+            font-weight: bold;
         }
-        /*課程列表*/
-        .course {
-            margin: 0px auto;
-            text-align: center;
+
+        td {
+            background-color: #f5faff;
         }
-        .course-list {
-            list-style: none;
-            padding: 0;
+
+        /* 偶數行條紋 */
+        tbody tr:nth-child(even) td {
+            background-color: #e8f3ff;
         }
-        .course-list li {
-            margin: 10px 0;
+
+        /* 無課程與有課程樣式 */
+        .course-info {
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 13px;
         }
-        .course-name {
-            color: white;
-            font-size: 16px;
-            background-color: #007bff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            width: 150px;
-            cursor: pointer;
-            transition: 0.3s;
+
+        .no-course {
+            color: #888;
+            background-color: #f3f3f3;
         }
-        .course-name:hover {
-            background-color: #0056b3;
+
+        .course-info:not(.no-course) {
+            color: #fff;
+            background-color: #4a90e2;
         }
-        .course p {
-            font-size: 25px;
+
+        /* 響應式 */
+        @media (max-width: 600px) {
+            table {
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-    </div>
-    <div class="container">
-        <div class="account">
-            <p><b> 目前帳號 </b></p>
-            <b>姓名：<span id="username">{{ name }}</span></b>
-        </div>
-        <div class="course">
-            <h1> 已選課表 </h1>
-            {% if courses %}
-            <ul class="course-list">
-                {% for course_name, course_id in courses %}
-                <li>
-                    <button class="course-name" onclick="window.location.href='/myapp/course_mydetail/{{ course_id }}'">
-                        {{ course_name }}
-                    </button>
-                </li>
+    <h1>{{ name }} 的已選課程</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>節次</th>
+                {% for day in days_of_week %}
+                    <th>星期{{ day }}</th>
                 {% endfor %}
-            </ul>
-            {% else %}
-            <p> 尚未選課 </p>
-            {% endif %}
-        </div>
-    </div>
+            </tr>
+        </thead>
+        <tbody>
+            {% for period in periods %}
+                <tr>
+                    <td>{{ period }}</td>
+                    {% for day in days_of_week %}
+                        <td>
+                            {% with timetable|get_item:day as day_courses %}
+                                {% if day_courses|get_item:period %}
+                                    <div class="course-info">{{ day_courses|get_item:period }}</div>
+                                {% else %}
+                                    <div class="course-info no-course">無課程</div>
+                                {% endif %}
+                            {% endwith %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
