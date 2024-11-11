@@ -148,7 +148,8 @@ def selected_courses_view(request):
         courses = [(entry.course_id.name, entry.course_id.time) for entry in curriculum_entries]
         
         # 初始化字典來存儲課表資料
-        timetable = defaultdict(lambda: [''] * 13)  # 每天有 13 節課
+        #timetable = defaultdict(lambda: [''] * 13)  # 每天有 13 節課
+        timetable = defaultdict(lambda: [[] for _ in range(13)])
 
         # 解析時間並將課程分配到 timetable
         for course_name, time in courses:
@@ -164,7 +165,7 @@ def selected_courses_view(request):
                         
                         if day in ['一', '二', '三', '四', '五', '六', '日'] and 0 <= period < 13:
                             # 填入課程名稱至對應的星期和節次中
-                            timetable[day][period] = course_name
+                            timetable[day][period].append(course_name)
                         else:
                             print(f"Warning: Invalid day or period for course '{course_name}': '{time_slot}'")
                     except ValueError:
@@ -185,6 +186,7 @@ def selected_courses_view(request):
         'name': student.name,
         'days_of_week': days_of_week,
         'periods': periods
+
     })
 
 
@@ -196,6 +198,28 @@ def course_detail(request, course_id):
     
     # 將課程資料傳遞給模板
     return render(request, 'myapp/course_detail.html', {'course': course})
+
+
+def course_detail_redirect(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        course_name = data.get("course_name")
+        student_name = data.get("student_name")
+
+        # 根據 student_name 查找對應的 Student
+        student = get_object_or_404(Student, name=student_name)
+
+        # 查找課程並驗證是否屬於該學生的課程
+        try:
+            course = Course.objects.get(name=course_name)
+            curriculum = Curriculum.objects.get(student_id=student, course_id=course)
+
+            # 成功時返回課程的 ID
+            return JsonResponse({"success": True, "course_id": course.id})
+        except (Course.DoesNotExist, Curriculum.DoesNotExist):
+            return JsonResponse({"success": False, "error": "課程資料未找到"})
+
+    return JsonResponse({"success": False, "error": "無效的請求"})
 
 
 def add_course(request, course_id):
@@ -212,11 +236,47 @@ def add_course(request, course_id):
     curriculum_entry, created = Curriculum.objects.get_or_create(student_id=student, course_id=course)
     
     if created:
-        message = "成功加選課程"
+        # 檢查是否存在衝堂的課程
+        conflict_courses = []
+        
+        # 將新增課程的上課時間取出
+        new_course_time = course.time.split('(')  # 假設時間格式為 "(一)06(一)07"
+        new_course_slots = set()  # 儲存新加選課程的所有時段
+        
+        for time_slot in new_course_time:
+            if time_slot:
+                day, period = time_slot.split(')')
+                day = day.strip()
+                period = period.strip()
+                new_course_slots.add((day, period))
+        
+        # 取得學生已選的所有課程
+        existing_courses = Curriculum.objects.filter(student_id=student)
+        
+        # 檢查每個已選課程是否與新加選課程時間衝突
+        for entry in existing_courses:
+            existing_course = entry.course_id
+            existing_course_time = existing_course.time.split('(')
+            
+            for time_slot in existing_course_time:
+                if time_slot:
+                    day, period = time_slot.split(')')
+                    day = day.strip()
+                    period = period.strip()
+                    
+                    # 檢查是否存在衝突
+                    if (day, period) in new_course_slots:
+                        conflict_courses.append(existing_course.name)
+                        break  # 若衝堂，則跳出檢查
+                        
+        # 返回結果
+        if conflict_courses:
+            conflict_message = "加選成功，但發現以下課程衝堂：" + ", ".join(conflict_courses)
+            return HttpResponse(conflict_message)
+        else:
+            return HttpResponse("成功加選課程")
     else:
-        message = "課程已加選，無需重複操作"
-    
-    return HttpResponse(message)
+        return HttpResponse("課程已加選，無需重複操作")
 
 
 def drop_course(request, course_id):

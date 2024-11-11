@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 課程詳細資訊頁面 </title>
+    <title>課程詳細資訊頁面</title>
     <style>
-        /*全域*/
+        /* 全域樣式 */
         body {
             font-family: Arial, sans-serif;
             width: 80%;
@@ -15,46 +15,64 @@
             text-align: center;
             padding-top: 20px;
         }
-        /*按鈕*/
+        /* 按鈕樣式 */
         .button {
             display: flex;
             justify-content: flex-end;
+            margin-top: 10px;
         }
-        .button a{
+        .button a {
             text-decoration: none;
             color: white;
             font-weight: bold;
             padding: 10px 20px;
             border-radius: 5px;
+            cursor: pointer;
         }
-        /*加選*/
+        /* 加選按鈕樣式 */
         .add {
             background-color: green;
             margin-right: 10px;
         }
-        /*退選*/
+        /* 退選按鈕樣式 */
         .drop {
             background-color: red;
         }
-        /*頁中*/
+        /* 內容樣式 */
         .container {
             line-height: 25px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1> {{ course.name }} </h1>
+    <h1>{{ course.name }}</h1>
     <div class="button">
-        <a href="{% url 'add_course' course.id %}" class="add"> 加選 </a>
-        <a href="{% url 'drop_course' course.id %}" class="drop"> 退選 </a>
+        <!-- 加選按鈕 -->
+        <a href="{% url 'add_course' course.id %}" class="add" onclick="return confirmAction(event, '確定要加選這門課程嗎？')">加選</a>
+        <!-- 退選按鈕 -->
+        <a href="{% url 'drop_course' course.id %}" class="drop" onclick="return confirmAction(event, '確定要退選這門課程嗎？')">退選</a>
     </div>
     <div class="container">
-        <p><strong> 開課系所 : </strong> {{ course.department }} </p>
-        <p><strong> 上課時間 : </strong> {{ course.time }} </p>
-        <p><strong> 授課教師 : </strong> {{ course.teacher }} </p>
-        <p><strong> 授課語言 : </strong> {{ course.language }} </p>
-        <p><strong> 課程類型 : </strong> {{ course.type }}</p>
-        <p><strong> 課程資訊 : </strong> {{ course.information }} </p>
+        <p><strong>開課系所:</strong> {{ course.department }}</p>
+        <p><strong>上課時間:</strong> {{ course.time }}</p>
+        <p><strong>授課教師:</strong> {{ course.teacher }}</p>
+        <p><strong>授課語言:</strong> {{ course.language }}</p>
+        <p><strong>課程類型:</strong> {{ course.type }}</p>
+        <p><strong>課程資訊:</strong> {{ course.information }}</p>
     </div>
+
+    <script>
+        function confirmAction(event, message) {
+            // 使用 confirm 彈出確認視窗
+            if (!confirm(message)) {
+                // 若使用者點選取消，則阻止跳轉
+                event.preventDefault();
+                return false;
+            }
+            // 若使用者點選確認，則允許跳轉
+            return true;
+        }
+    </script>
 </body>
 </html>

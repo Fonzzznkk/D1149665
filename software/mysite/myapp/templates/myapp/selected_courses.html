@@ -104,7 +104,9 @@
                         <td>
                             {% with timetable|get_item:day as day_courses %}
                                 {% if day_courses|get_item:period %}
-                                    <div class="course-info">{{ day_courses|get_item:period }}</div>
+                                    {% for course_name in day_courses|get_item:period %}
+                                        <div class="course-info" onclick="sendCourse('{{ course_name }}')">{{ course_name }}</div>
+                                    {% endfor %}
                                 {% else %}
                                     <div class="course-info no-course">無課程</div>
                                 {% endif %}
@@ -115,5 +117,26 @@
             {% endfor %}
         </tbody>
     </table>
+    <script>
+        function sendCourse(courseName) {
+            fetch("{% url 'course_detail_redirect' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ "course_name": courseName, "student_name": "{{ name }}" })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = `/myapp/course_mydetail/${data.course_id}`;
+                } else {
+                    alert("課程資料未找到");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
 </body>
 </html>
