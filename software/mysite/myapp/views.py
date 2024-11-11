@@ -1,6 +1,7 @@
 
 
 # Create your views here.
+from ctypes import sizeof
 from django.http import HttpResponse
 import os
 from django.shortcuts import render, redirect, get_object_or_404
@@ -270,7 +271,10 @@ def add_course(request, course_id):
                         break  # 若衝堂，則跳出檢查
                         
         # 返回結果
-        if conflict_courses:
+        count = 0
+        for i in conflict_courses:
+            count+=1
+        if count>1:
             conflict_message = "加選成功，但發現以下課程衝堂：" + ", ".join(conflict_courses)
             return HttpResponse(conflict_message)
         else:
