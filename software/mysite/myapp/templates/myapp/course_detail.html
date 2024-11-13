@@ -52,6 +52,9 @@
         <a href="{% url 'add_course' course.id %}" class="add" onclick="return confirmAction(event, '確定要加選這門課程嗎？')">加選</a>
         <!-- 退選按鈕 -->
         <a href="{% url 'drop_course' course.id %}" class="drop" onclick="return confirmAction(event, '確定要退選這門課程嗎？')">退選</a>
+        <div class="uibutton" onclick="window.location.href='/myapp/homepage/'">回主頁</div>
+        <div class="uibutton" onclick="window.location.href='/myapp/selected_courses/'">已選課表</div>
+        <div class="uibutton" onclick="window.location.href='/myapp/coursesearch/'">課程搜尋</div>
     </div>
     <div class="container">
         <p><strong>開課系所:</strong> {{ course.department }}</p>
