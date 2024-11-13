@@ -47,19 +47,19 @@
             margin: 0;
         }
         /*頁首*/
-        .login-header {
+        .header {
             background: linear-gradient(to right, #80bdff, #007bff);
             height: 100px;
             display: flex;
         }
-        .login-header h1 {
+        .header h1 {
             margin-right: 30px;
             margin-left: auto;
             color: white;
             justify-content: center;
         }
         /*頁中*/
-        .login-container {
+        .container {
             display: flex;
         }
         /*登入框*/
@@ -106,7 +106,7 @@
             background-color: #0056b3;
         }
         /*操作說明*/
-        .login-announcement {
+        .announcement {
             background-color: white;
             border-radius: 8px;
             border-collapse: collapse;
@@ -115,25 +115,28 @@
             margin-right: 20px;
             margin-left: auto;
         }
-        .login-announcement h1 {
+        .announcement h1 {
             text-align: center;
             color: gray;
         }
         /*頁尾*/
-        .login-footer {
+        .footer {
             text-align: center;
             font-size: 12px;
             color: gray;
-            margin-top: 200px;
+            position: fixed;
+            top: 95%;
+            left: 0;
+            right: 0;
         }
     </style>
 </head>
 <body>
-    <div class="login-header">
+    <div class="header">
         <h1> 第五組 選課系統 </h1>
     </div>
     <br>
-    <div class="login-container">
+    <div class="container">
         <div class="login-form">
             <h1> 登入系統 </h1>
             <form method="POST" action="/myapp/login/">
@@ -143,7 +146,7 @@
                 <button id="login-button" type="submit"> <b> 登入 </b> </button>
             </form>
         </div>
-        <div class="login-announcement">
+        <div class="announcement">
             <h1> 系統操作說明 </h1>
             <ol>
                 <b><li> 課程資訊 </li></b>
@@ -165,7 +168,7 @@
             </ol>
         </div>
     </div>
-    <div class="login-footer"> © 開發者：軟體工程開發實務第五組　2024/11/07 </div>
+    <div class="footer"> © 開發者：軟體工程開發實務第五組 </div>
     <script>
 
         $('#login-button').click(function () {

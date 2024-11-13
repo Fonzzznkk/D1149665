@@ -53,6 +53,12 @@
             height: 100px;
             display: flex;
         }
+        .header h1 {
+            margin-right: 30px;
+            margin-left: auto;
+            color: white;
+            justify-content: center;
+        }
         /*頁中*/
         .container {
             display: flex;
@@ -91,10 +97,21 @@
         .function button:hover {
             background-color: #0056b3;
         }
+        /*頁尾*/
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: gray;
+            position: fixed;
+            top: 95%;
+            left: 0;
+            right: 0;
+        }
     </style>
 </head>
 <body>
     <div class="header">
+        <h1> 主頁面 </h1>
     </div>
     <div class="container">
         <div class="account">
@@ -106,6 +123,7 @@
             <button id="coursesearch-button" type="button"><b> 課程查詢 </b></button>
         </div>
     </div>
+    <div class="footer"> © 開發者：軟體工程開發實務第五組 </div>
     <script>
         // 當頁面載入時彈出提醒
         
