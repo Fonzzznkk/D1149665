@@ -50,6 +50,20 @@
             background-color: #f5faff;
         }
 
+        .uibutton{
+            padding: 20px;
+            border-radius: 5px;
+            font-size: 20px;
+            position: relative;
+            top: -10px;
+            left: 600px;
+        }
+
+        .uibutton:not(.no-course) {
+            color: #fff;
+            background-color: #4a90e2;
+        }
+
         /* 偶數行條紋 */
         tbody tr:nth-child(even) td {
             background-color: #e8f3ff;
@@ -86,7 +100,8 @@
 </head>
 <body>
     <h1>{{ name }} 的已選課程</h1>
-
+    <div class="uibutton" onclick="window.location.href='/myapp/homepage/'">回主頁</div>
+    <div class="uibutton" onclick="window.location.href='/myapp/coursesearch/'">課程搜尋</div>
     <table>
         <thead>
             <tr>
