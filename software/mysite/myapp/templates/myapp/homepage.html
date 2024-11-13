@@ -66,46 +66,69 @@
         }
         /*帳號資訊*/
         .account {
+            position: absolute;
             border: solid gray;
+            top: 16%;
+            left: 1%;
             border-collapse: collapse;
             border-radius: 8px;
             width: 200px;
-            height: 100px;
+            height: 120px;
             text-align: center;
-            margin-right: auto;
-            margin-left: 10px;
         }
         .account p {
-            margin: 5px 0px;
+            font-weight: bold;
+            line-height: 14px;
         }
-        /*功能欄*/
-        .function {
-            margin-right: 10px;
-            margin-left: auto;
+        .account .logout {
+            position: absolute;
+            top: 70%;
+            left: 35%;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #007bff;
+            width: 50px;
+            border-radius: 8%;
+            padding: 5px;
+            cursor: pointer;
         }
-        .function button {
+        /*按鈕*/
+        .button {
+            position: absolute;
+            top: 19%;
+            text-align: center;
             color: white;
             font-size: 16px;
+            font-weight: bold;
             background-color: #007bff;
-            margin: 0px 5px;
-            padding: 15px 15px;
+            width: 100px;
+            padding: 15px;
             border: none;
             border-radius: 8px;
             transition: 0.3s;
             cursor: pointer;
         }
-        .function button:hover {
+        .button:hover {
             background-color: #0056b3;
+        }
+        /*已選課表*/
+        .selected {
+            right: 2%;
+        }
+        /*課程搜尋*/
+        .search {
+            right: 12%;
         }
         /*頁尾*/
         .footer {
-            text-align: center;
-            font-size: 12px;
-            color: gray;
-            position: fixed;
+            position: absolute;
             top: 95%;
             left: 0;
             right: 0;
+            text-align: center;
+            color: gray;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -113,16 +136,14 @@
     <div class="header">
         <h1> 主頁面 </h1>
     </div>
-    <div class="container">
-        <div class="account">
-            <p><b> 目前帳號 </b></p>
-            <b>姓名：<span id="username">{{ name }}</span></b>
-        </div>
-        <div class="function">
-            <div class="uibutton" onclick="window.location.href='/myapp/login/'">登出</div>
-            <button id="curriculum-button" type="button"><b> 已選課表 </b></button>
-            <button id="coursesearch-button" type="button"><b> 課程查詢 </b></button>
-        </div>
+    <div class="account">
+        <p><b> 目前帳號 </b></p>
+        <b>姓名：<span id="username">{{ name }}</span></b>
+        <div class="logout" onclick="window.location.href='/myapp/login/'"> 登出 </div>
+    </div>
+    <div class="function">
+        <button class="button selected" id="curriculum-button" type="button"><b> 已選課表 </b></button>
+        <button class="button search" id="coursesearch-button" type="button"><b> 課程查詢 </b></button>
     </div>
     <div class="footer"> © 開發者：軟體工程開發實務第五組 </div>
     <script>
