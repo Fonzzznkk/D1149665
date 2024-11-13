@@ -4,110 +4,141 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>{{ name }} 的已選課程</title>
+    <title> 已選課表頁面 </title>
     <style>
-        /* 整體樣式 */
+        /* 全域 */
         body {
+            background-color: white;
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             margin: 0;
-            padding: 20px;
         }
-
-        h1 {
-            font-size: 24px;
-            color: #4a90e2;
-            margin-bottom: 20px;
+        /*頁首*/
+        .header {
+            background: linear-gradient(to right, #80bdff, #007bff);
+            height: 100px;
+            display: flex;
         }
-
-        /* 表格樣式 */
-        table {
-            width: 100%;
-            max-width: 800px;
+        .header h1 {
+            margin-right: 30px;
+            margin-left: auto;
+            color: white;
+            justify-content: center;
+        }
+        /*帳號資訊*/
+        .account {
+            position: absolute;
+            top: 16%;
+            left: 1%;
+            border: solid gray;
             border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 200px;
+            height: 90px;
+            text-align: center;
         }
-
+        .account p  {
+            font-weight: bold;
+        }
+        /*按鈕*/
+        .button {
+            position: absolute;
+            top: 19%;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            background-color: #007bff;
+            width: 70px;
+            padding: 15px;
+            border-radius: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        /*主頁*/
+        .homepage {
+            right: 2%;
+        }
+        /*課程搜尋*/
+        .search {
+            right: 12%;
+        }
+        /*表格*/
+        table {
+            position: relative;
+            top: 110px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
+            border: 1px solid #DDDDDD;
+            padding: 10px;
             text-align: center;
             font-size: 14px;
         }
-
         th {
-            background-color: #4a90e2;
-            color: #fff;
+            background-color: #007bff;
+            color: white;
             font-weight: bold;
         }
-
-        td {
-            background-color: #f5faff;
+        /*單數行*/
+        tbody tr:nth-child(odd) td {
+            background-color: #E6F2FF;
         }
-
-        .uibutton{
-            padding: 20px;
-            border-radius: 5px;
-            font-size: 20px;
-            position: relative;
-            top: -10px;
-            left: 600px;
-        }
-
-        .uibutton:not(.no-course) {
-            color: #fff;
-            background-color: #4a90e2;
-        }
-
-        /* 偶數行條紋 */
+        /*偶數行*/
         tbody tr:nth-child(even) td {
-            background-color: #e8f3ff;
+            background-color: #F0F8FF;
         }
-
-        /* 無課程與有課程樣式 */
-        .course-info {
-            padding: 8px;
+        /*課程*/
+        .course {
+            width: 75px;
+            padding: 10px;
             border-radius: 5px;
-            font-size: 13px;
+            font-size: 12px;
         }
-
         .no-course {
-            color: #888;
-            background-color: #f3f3f3;
+            color: gray;
+            background-color: #DDDDDD;
         }
-
-        .course-info:not(.no-course) {
-            color: #fff;
-            background-color: #4a90e2;
+        .course:not(.no-course) {
+            color: white;
+            background-color: #007bff;
+            transition: 0.3s;
+            cursor: pointer;
         }
-
-        /* 響應式 */
-        @media (max-width: 600px) {
-            table {
-                font-size: 12px;
-            }
-
-            h1 {
-                font-size: 20px;
-            }
+        .course:not(.no-course):hover {
+            background-color: #0056b3;
+        }
+        /*頁尾*/
+        .footer {
+            position: absolute;
+            top: 1000px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: gray;
+            font-size: 12px;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>{{ name }} 的已選課程</h1>
-    <div class="uibutton" onclick="window.location.href='/myapp/homepage/'">回主頁</div>
-    <div class="uibutton" onclick="window.location.href='/myapp/coursesearch/'">課程搜尋</div>
+    <div class="header">
+        <h1> 已選課表 </h1>
+    </div>
+    <div class="account">
+        <p> 目前帳號 </p>
+        <b>姓名：</b><span id="username">{{ name }}</span>
+    </div>
+    <div class="button homepage" onclick="window.location.href='/myapp/homepage/'"> 回主頁 </div>
+    <div class="button search" onclick="window.location.href='/myapp/coursesearch/'"> 課程搜尋 </div>
     <table>
         <thead>
             <tr>
-                <th>節次</th>
+                <th> 節次 </th>
                 {% for day in days_of_week %}
-                    <th>星期{{ day }}</th>
+                    <th> 星期{{ day }} </th>
                 {% endfor %}
             </tr>
         </thead>
@@ -120,10 +151,10 @@
                             {% with timetable|get_item:day as day_courses %}
                                 {% if day_courses|get_item:period %}
                                     {% for course_name in day_courses|get_item:period %}
-                                        <div class="course-info" onclick="sendCourse('{{ course_name }}')">{{ course_name }}</div>
+                                        <div class="course" onclick="sendCourse('{{ course_name }}')"> {{ course_name }} </div>
                                     {% endfor %}
                                 {% else %}
-                                    <div class="course-info no-course">無課程</div>
+                                    <div class="course no-course"> 無課程 </div>
                                 {% endif %}
                             {% endwith %}
                         </td>
@@ -132,6 +163,7 @@
             {% endfor %}
         </tbody>
     </table>
+    <div class="footer"> © 開發者：軟體工程開發實務第五組 </div>
     <script>
         function sendCourse(courseName) {
             fetch("{% url 'course_detail_redirect' %}", {
