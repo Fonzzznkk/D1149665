@@ -3,66 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>課程詳細資訊頁面</title>
+    <title> {{course.name}} 課程詳細資訊頁面 </title>
     <style>
-        /* 全域樣式 */
+        /*全域*/
         body {
+            background-color: white;
             font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        /*按鈕*/
+        .func {
+            position: absolute;
+            top: 2%;
+            text-align: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            background-color: #007bff;
+            width: 70px;
+            padding: 15px;
+            border-radius: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .func:hover {
+            background-color: #0056b3;
+        }
+        /*主頁*/
+        .homepage {
+            right: 2%;
+        }
+        /*已選課表*/
+        .selected {
+            right: 11%;
+        }
+        /*課程查詢*/
+        .search {
+            right: 20%;
+        }
+        /*課程資訊*/
+        .container {
+            position: relative;
+            top: 20px;
             width: 80%;
             margin: 0 auto;
+            line-height: 25px;
+            margin-top: 20px;
         }
-        h1 {
+        .container h1 {
+            position: relative;
             text-align: center;
-            padding-top: 20px;
+            width: auto;
+            margin: 0;
         }
-        /* 按鈕樣式 */
         .button {
+            position: relative;
+            top: 15px;
             display: flex;
             justify-content: flex-end;
             margin-top: 10px;
         }
         .button a {
-            text-decoration: none;
             color: white;
+            text-decoration: none;
             font-weight: bold;
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
         }
-        /* 加選按鈕樣式 */
+        /*加選*/
         .add {
+            margin-right: 15px;
             background-color: green;
-            margin-right: 10px;
+            transition: 0.3s;
         }
-        /* 退選按鈕樣式 */
+        .add:hover {
+            background-color: #006624;
+        }
+        /*退選*/
         .drop {
             background-color: red;
+            transition: 0.3s;
         }
-        /* 內容樣式 */
-        .container {
-            line-height: 25px;
-            margin-top: 20px;
+        .drop:hover {
+            background-color: #b50000;
         }
     </style>
 </head>
 <body>
-    <h1>{{ course.name }}</h1>
-    <div class="button">
-        <!-- 加選按鈕 -->
-        <a href="{% url 'add_course' course.id %}" class="add" onclick="return confirmAction(event, '確定要加選這門課程嗎？')">加選</a>
-        <!-- 退選按鈕 -->
-        <a href="{% url 'drop_course' course.id %}" class="drop" onclick="return confirmAction(event, '確定要退選這門課程嗎？')">退選</a>
-        <div class="uibutton" onclick="window.location.href='/myapp/homepage/'">回主頁</div>
-        <div class="uibutton" onclick="window.location.href='/myapp/selected_courses/'">已選課表</div>
-        <div class="uibutton" onclick="window.location.href='/myapp/coursesearch/'">課程搜尋</div>
-    </div>
+    <div class="func homepage" onclick="window.location.href='/myapp/homepage/'"> 回主頁 </div>
+    <div class="func selected" onclick="window.location.href='/myapp/selected_courses/'"> 已選課表 </div>
+    <div class="func search" onclick="window.location.href='/myapp/coursesearch/'"> 課程搜尋 </div>
     <div class="container">
+        <h1> {{ course.name }} </h1>
+        <div class="button">
+            <a href="{% url 'add_course' course.id %}" class="add" onclick="return confirmAction(event, '確定要加選這門課程嗎？')"> 加選 </a>
+            <a href="{% url 'drop_course' course.id %}" class="drop" onclick="return confirmAction(event, '確定要退選這門課程嗎？')"> 退選 </a>
+        </div>
         <p><strong>開課系所:</strong> {{ course.department }}</p>
         <p><strong>上課時間:</strong> {{ course.time }}</p>
         <p><strong>授課教師:</strong> {{ course.teacher }}</p>
         <p><strong>授課語言:</strong> {{ course.language }}</p>
         <p><strong>課程類型:</strong> {{ course.type }}</p>
-        <p><strong>課程資訊:</strong> {{ course.information }}</p>
+        <p><strong>課程資訊:</strong> {{ course.information|safe }}</p>
     </div>
 
     <script>
