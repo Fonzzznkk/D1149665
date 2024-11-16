@@ -59,17 +59,12 @@
             color: white;
             justify-content: center;
         }
-        /*頁中*/
-        .container {
-            display: flex;
-            margin-top: 10px;
-        }
         /*帳號資訊*/
         .account {
             position: absolute;
-            border: solid gray;
             top: 16%;
             left: 1%;
+            border: solid gray;
             border-collapse: collapse;
             border-radius: 8px;
             width: 200px;
@@ -77,23 +72,32 @@
             text-align: center;
         }
         .account p {
+            position: relative;
+            top: 3%;
             font-weight: bold;
-            line-height: 14px;
+            line-height: 0;
         }
-        .account .logout {
-            position: absolute;
-            top: 70%;
+        .account span {
+            color: blue;
+        }
+        /*登出*/
+        .logout {
+            position: relative;
+            top: 7%;
             left: 35%;
             color: white;
             font-size: 14px;
             font-weight: bold;
             background-color: #007bff;
             width: 50px;
-            border-radius: 8%;
             padding: 5px;
+            border-radius: 8%;
+            transition: 0.3s;
             cursor: pointer;
         }
-        /*按鈕*/
+        .logout:hover {
+            background-color: #0056b3;
+        }
         .button {
             position: absolute;
             top: 19%;
@@ -120,6 +124,14 @@
         .search {
             right: 12%;
         }
+        .hint {
+            position: relative;
+            top: 110px;
+            text-align: center;
+        }
+        .hint span {
+            color:#007bff;
+        }
         /*頁尾*/
         .footer {
             position: absolute;
@@ -137,13 +149,19 @@
         <h1> 主頁面 </h1>
     </div>
     <div class="account">
-        <p><b> 目前帳號 </b></p>
-        <b>姓名：<span id="username">{{ name }}</span></b>
+        <p> 目前帳號 </p>
+        <b>姓名：</b><span id="username">{{ name }}</span> <br>
+        <b>學號：</b><span id="uid">{{ uid }}</span>
         <div class="logout" onclick="window.location.href='/myapp/login/'"> 登出 </div>
     </div>
     <div class="function">
         <button class="button selected" id="curriculum-button" type="button"><b> 已選課表 </b></button>
         <button class="button search" id="coursesearch-button" type="button"><b> 課程查詢 </b></button>
+    </div>
+    <div class="hint">
+        <h1> <span id="username">{{ name }}</span> 歡迎！ </h1>
+        <h1> 點選課程查詢以進行選課 </h1>
+        <h1> 點選已選課表以檢視加選課程 </h1>
     </div>
     <div class="footer"> © 開發者：軟體工程開發實務第五組 </div>
     <script>

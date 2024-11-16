@@ -55,7 +55,7 @@ def homepage(request):
     if not uid:
         return redirect('/myapp/login/')  # 未登入的用戶重定向到登入頁面
     if request.method == 'GET':
-        return render(request, 'myapp/homepage.html',{'name': name})
+        return render(request, 'myapp/homepage.html', {'name': name, 'uid': uid})
     elif request.method == 'POST':
         type = request.POST.get('type')
         print("Type received:", type)
