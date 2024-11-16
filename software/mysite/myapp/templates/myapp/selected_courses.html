@@ -62,7 +62,7 @@
         .button:hover {
             background-color: #0056b3;
         }
-        /*主頁*/
+        /*首頁*/
         .homepage {
             right: 2%;
         }
@@ -119,7 +119,7 @@
         /*頁尾*/
         .footer {
             position: absolute;
-            top: 1000px;
+            top: 1050px;
             left: 0;
             right: 0;
             text-align: center;
@@ -139,7 +139,7 @@
         <b>學號：</b><span id="uid">{{ uid }}</span>
     </div>
     <div class="button homepage" onclick="window.location.href='/myapp/homepage/'"> 回首頁 </div>
-    <div class="button search" onclick="window.location.href='/myapp/coursesearch/'"> 課程搜尋 </div>
+    <div class="button search" onclick="window.location.href='/myapp/coursesearch/'"> 課程查詢 </div>
     <table>
         <thead>
             <tr>
@@ -158,7 +158,7 @@
                             {% with timetable|get_item:day as day_courses %}
                                 {% if day_courses|get_item:period %}
                                     {% for course_name in day_courses|get_item:period %}
-                                        <div class="course" onclick="sendCourse('{{ course_name }}')"> {{ course_name }} </div>
+                                        <div class="course" onclick="sendCourse('{{ course_name }}')"><b> {{ course_name }} </b></div>
                                     {% endfor %}
                                 {% else %}
                                     <div class="course no-course"> 無課程 </div>
