@@ -116,6 +116,7 @@ def coursesearch(request):
             # 傳遞結果到模板
             return render(request, 'myapp/coursesearch.html', {
                 'name': name,
+                'uid': uid,
                 'courses_with_code': courses_with_code,
                 'course_name': course_name,
                 'course_code': course_code,
