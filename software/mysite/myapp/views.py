@@ -183,8 +183,9 @@ def selected_courses_view(request):
 
     # 渲染模板
     return render(request, 'myapp/selected_courses.html', {
-        'timetable': timetable,
         'name': student.name,
+        'uid': uid,
+        'timetable': timetable,
         'days_of_week': days_of_week,
         'periods': periods
 

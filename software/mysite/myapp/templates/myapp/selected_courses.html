@@ -32,12 +32,18 @@
             border: solid gray;
             border-collapse: collapse;
             border-radius: 8px;
-            width: 200px;
+            width: 180px;
             height: 90px;
             text-align: center;
         }
         .account p  {
+            position: relative;
+            top: 3%;
             font-weight: bold;
+            line-height: 0;
+        }
+        .account span {
+            color: blue;
         }
         /*按鈕*/
         .button {
@@ -129,7 +135,8 @@
     </div>
     <div class="account">
         <p> 目前帳號 </p>
-        <b>姓名：</b><span id="username">{{ name }}</span>
+        <b>姓名：</b><span id="username">{{ name }}</span> <br>
+        <b>學號：</b><span id="uid">{{ uid }}</span>
     </div>
     <div class="button homepage" onclick="window.location.href='/myapp/homepage/'"> 回主頁 </div>
     <div class="button search" onclick="window.location.href='/myapp/coursesearch/'"> 課程搜尋 </div>
