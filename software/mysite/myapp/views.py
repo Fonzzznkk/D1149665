@@ -9,6 +9,8 @@ import json
 from .models import Student,Curriculum,Course
 from django.http import JsonResponse
 from collections import defaultdict
+from django.utils import translation
+from django.conf import settings
 
 def hello_world(request):
     return HttpResponse("Hello, world!")
@@ -306,3 +308,8 @@ def drop_course(request, course_id):
     
     return HttpResponse(message)
 
+def switch_language(request, language):
+    translation.activate(language)
+    response = redirect(request.META.get('HTTP_REFERER'))
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+    return response

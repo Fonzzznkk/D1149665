@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -79,9 +81,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Course_selection_system',     # 創建的資料庫名稱
         'USER': 'root',           # 默認 MySQL 用戶名（XAMPP 默認是 root）
-        'PASSWORD': 'Kkk51550',           # XAMPP 默認 root 密碼是空的
+        'PASSWORD': '',           # XAMPP 默認 root 密碼是空的
         'HOST': '',      # 使用本地伺服器
-        'PORT': '3307',           # MySQL 預設端口
+        'PORT': '3306',           # MySQL 預設端口
     }
 }
 
@@ -108,12 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'en'
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 
@@ -126,3 +125,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LANGUAGE_CODE = 'zh-hant'  # 默認語言為繁體中文
+LANGUAGES = [
+    ('en', 'English'),
+    ('zh-hant', '中文'),
+]
+
+
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]

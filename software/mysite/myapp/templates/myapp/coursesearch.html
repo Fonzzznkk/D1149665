@@ -90,16 +90,19 @@
     </style>
 </head>
 <body>
+    {% load i18n %}
     <div class="header">
-        <h1> 課程查詢 </h1>
+        <a href="{% url 'switch_language' 'zh-hant' %}">中文</a> |
+        <a href="{% url 'switch_language' 'en' %}">English</a>
+        <h1>{% trans "課程查詢" %}</h1>
     </div>
     <div class="account">
-        <p> 目前帳號 </p> <br>
-        <b>姓名：</b><span id="username">{{ name }}</span> <br>
-        <b>學號：</b><span id="uid">{{ uid }}</span>
+        <p>{% trans "目前帳號" %}</p> <br>
+        <b>{% trans "姓名:" %}</b><span id="username">{{ name }}</span> <br>
+        <b>{% trans "學號:" %}</b><span id="uid">{{ uid }}</span>
     </div>
-    <div class="button homepage" onclick="window.location.href='/myapp/homepage/'"> 回首頁 </div>
-    <div class="button selected" onclick="window.location.href='/myapp/selected_courses/'"> 已選課表 </div>
+    <div class="button homepage" onclick="window.location.href='/myapp/homepage/'">{% trans "回首頁" %}</div>
+    <div class="button selected" onclick="window.location.href='/myapp/selected_courses/'">{% trans "已選課表" %}</div>
 
     <div class="container mt-5">
         <!-- 搜尋表單 -->
@@ -109,74 +112,74 @@
                     <div class="form-check">
                         <input type="checkbox" name="search_name" class="form-check-input" id="search_name" 
                             {% if request.GET.search_name %}checked{% endif %}>
-                        <label class="form-check-label" for="search_name">搜尋課程名稱</label>
+                        <label class="form-check-label" for="search_name">{% trans "搜尋課程名稱" %}</label>
                     </div>
-                    <input type="text" name="course_name" class="form-control" value="{{ course_name }}" placeholder="課程名稱">
+                    <input type="text" name="course_name" class="form-control" value="{{ course_name }}" placeholder="{% trans "課程名稱" %}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <div class="form-check">
                         <input type="checkbox" name="search_code" class="form-check-input" id="search_code"
                             {% if request.GET.search_code %}checked{% endif %}>
-                        <label class="form-check-label" for="search_code">搜尋課程代碼</label>
+                        <label class="form-check-label" for="search_code">{% trans "搜尋課程代碼" %}</label>
                     </div>
-                    <input type="text" name="course_code" class="form-control" value="{{ course_code }}" placeholder="課程代碼">
+                    <input type="text" name="course_code" class="form-control" value="{{ course_code }}" placeholder="{% trans "課程代碼" %}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <div class="form-check">
                         <input type="checkbox" name="search_department" class="form-check-input" id="search_department"
                             {% if request.GET.search_department %}checked{% endif %}>
-                        <label class="form-check-label" for="search_department">搜尋開課系所</label>
+                        <label class="form-check-label" for="search_department">{% trans "搜尋開課系所" %}</label>
                     </div>
-                    <input type="text" name="department" class="form-control" value="{{ department }}" placeholder="開課系所">
+                    <input type="text" name="department" class="form-control" value="{{ department }}" placeholder="{% trans "開課系所" %}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <div class="form-check">
                         <input type="checkbox" name="search_time" class="form-check-input" id="search_time"
                             {% if request.GET.search_time %}checked{% endif %}>
-                        <label class="form-check-label" for="search_time">搜尋修課時段</label>
+                        <label class="form-check-label" for="search_time">{% trans "搜尋修課時段" %}</label>
                     </div>
-                    <input type="text" name="time" class="form-control" value="{{ time }}" placeholder="修課時段">
+                    <input type="text" name="time" class="form-control" value="{{ time }}" placeholder="{% trans "修課時段" %}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <div class="form-check">
                         <input type="checkbox" name="search_teacher" class="form-check-input" id="search_teacher"
                             {% if request.GET.search_teacher %}checked{% endif %}>
-                        <label class="form-check-label" for="search_teacher">搜尋授課教師</label>
+                        <label class="form-check-label" for="search_teacher">{% trans "搜尋授課教師" %}</label>
                     </div>
-                    <input type="text" name="teacher" class="form-control" value="{{ teacher }}" placeholder="授課教師">
+                    <input type="text" name="teacher" class="form-control" value="{{ teacher }}" placeholder="{% trans "授課教師" %}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <div class="form-check">
                         <input type="checkbox" name="search_language" class="form-check-input" id="search_language"
                             {% if request.GET.search_language %}checked{% endif %}>
-                        <label class="form-check-label" for="search_language">搜尋授課語言</label>
+                        <label class="form-check-label" for="search_language">{% trans "搜尋授課語言" %}</label>
                     </div>
-                    <input type="text" name="language" class="form-control" value="{{ language }}" placeholder="授課語言">
+                    <input type="text" name="language" class="form-control" value="{{ language }}" placeholder="{% trans "授課語言" %}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <div class="form-check">
                         <input type="checkbox" name="search_type" class="form-check-input" id="search_type"
                             {% if request.GET.search_type %}checked{% endif %}>
-                        <label class="form-check-label" for="search_type">搜尋課程種類</label>
+                        <label class="form-check-label" for="search_type">{% trans "搜尋課程種類" %}</label>
                     </div>
-                    <input type="text" name="course_type" class="form-control" value="{{ course_type }}" placeholder="課程種類">
+                    <input type="text" name="course_type" class="form-control" value="{{ course_type }}" placeholder="{% trans "課程種類" %}">
                 </div>
             </div>
             
-            <button type="submit" class="btn btn-primary"> 搜尋 </button>
+            <button type="submit" class="btn btn-primary">{% trans "搜尋" %}</button>
         </form>
 
         <!-- 搜尋結果 -->
         {% if courses_with_code %}
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0">搜尋結果</h5>
+                    <h5 class="mb-0">{% trans "搜尋結果" %}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
                     {% for item in courses_with_code %}
@@ -184,18 +187,18 @@
                             <div>
                                 <strong>{{ item.course_code }}</strong>: {{ item.course.name }} - {{ item.course.department }}
                                 <br>
-                                授課教師: {{ item.course.teacher }}, 授課語言: {{ item.course.language }}
+                                {% trans "授課教師" %}: {{ item.course.teacher }}, {% trans "授課語言" %}: {{ item.course.language }}
                                 <br>
-                                修課時段: {{ item.course.time }}
+                                {% trans "修課時段" %}: {{ item.course.time }}
                             </div>
                             <!-- 詳細資訊按鈕 -->
-                            <button class="course-btn"onclick="window.location.href='/myapp/course_mydetail/{{ item.course_code }}'"> 詳細資訊 </button>
+                            <button class="course-btn"onclick="window.location.href='/myapp/course_mydetail/{{ item.course_code }}'">{% trans "詳細資訊" %}</button>
                         </li>
                     {% endfor %}
                 </ul>
             </div>
         {% else %}
-            <p class="text-center text-muted">未找到符合條件的課程。</p>
+            <p class="text-center text-muted">{% trans "未找到符合條件的課程。" %}</p>
         {% endif %}
     </div>
 

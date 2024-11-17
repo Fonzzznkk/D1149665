@@ -92,21 +92,24 @@
     </style>
 </head>
 <body>
-    <div class="func homepage" onclick="window.location.href='/myapp/homepage/'"> 回首頁 </div>
-    <div class="func selected" onclick="window.location.href='/myapp/selected_courses/'"> 已選課表 </div>
-    <div class="func search" onclick="window.location.href='/myapp/coursesearch/'"> 課程搜尋 </div>
+    {% load i18n %}
+    <div class="func homepage" onclick="window.location.href='/myapp/homepage/'"> {% trans "回首頁" %} </div>
+    <div class="func selected" onclick="window.location.href='/myapp/selected_courses/'"> {% trans "已選課表" %} </div>
+    <div class="func search" onclick="window.location.href='/myapp/coursesearch/'"> {% trans "課程搜尋" %} </div>
+    <a href="{% url 'switch_language' 'zh-hant' %}">中文</a> |
+    <a href="{% url 'switch_language' 'en' %}">English</a>
     <div class="container">
         <h1> {{ course.name }} </h1>
         <div class="button">
-            <a href="{% url 'add_course' course.id %}" class="add" onclick="return confirmAction(event, '確定要加選這門課程嗎？')"> 加選 </a>
-            <a href="{% url 'drop_course' course.id %}" class="drop" onclick="return confirmAction(event, '確定要退選這門課程嗎？')"> 退選 </a>
+            <a href="{% url 'add_course' course.id %}" class="add" onclick="return confirmAction(event, '{% trans '確定要加選這門課程嗎？' %}')"> {% trans "加選" %} </a>
+            <a href="{% url 'drop_course' course.id %}" class="drop" onclick="return confirmAction(event, '{% trans '確定要退選這門課程嗎？' %}')"> {% trans "退選" %} </a>
         </div>
-        <p><strong>開課系所:</strong> {{ course.department }}</p>
-        <p><strong>上課時間:</strong> {{ course.time }}</p>
-        <p><strong>授課教師:</strong> {{ course.teacher }}</p>
-        <p><strong>授課語言:</strong> {{ course.language }}</p>
-        <p><strong>課程類型:</strong> {{ course.type }}</p>
-        <p><strong>課程資訊:</strong> {{ course.information|safe }}</p>
+        <p><strong>{% trans "開課系所:" %}</strong> {{ course.department }}</p>
+        <p><strong>{% trans "上課時間:" %}</strong> {{ course.time }}</p>
+        <p><strong>{% trans "授課教師:" %}</strong> {{ course.teacher }}</p>
+        <p><strong>{% trans "授課語言:" %}</strong> {{ course.language }}</p>
+        <p><strong>{% trans "課程類型:" %}</strong> {{ course.type }}</p>
+        <p><strong>{% trans "課程資訊:" %}</strong> {{ course.information|safe }}</p>
     </div>
 
     <script>
