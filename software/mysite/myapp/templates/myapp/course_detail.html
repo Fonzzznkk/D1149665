@@ -98,6 +98,19 @@
         .drop:hover {
             background-color: #b50000;
         }
+        .alert {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            width: auto;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -135,6 +148,28 @@
             // 若使用者點選確認，則允許跳轉
             return true;
         }
+        // 自動跳轉腳本
+        document.addEventListener("DOMContentLoaded", function() {
+         const alertBox = document.querySelector('.alert');
+        if (alertBox) {
+            const redirectUrl = alertBox.getAttribute('data-url'); // 使用正確的屬性名稱
+                if (redirectUrl) {
+                    setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 3000); // 3秒後跳轉
+            }
+        }
+});
     </script>
+    <!-- 提示框 -->
+    {% if messages %}
+        <div class="alert" data-url="{% url 'selected_courses' %}">
+            {% for message in messages %}
+               <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

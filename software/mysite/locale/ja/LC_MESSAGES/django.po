@@ -247,8 +247,8 @@ msgid "加選方式：在課程詳細資訊頁面點擊加選按鈕，確認加�
 msgstr "追加方法：コース詳細情報ページで「追加」ボタンをクリックし、確認すると登録済みコース表に移動します。"
 
 #: .\myapp\templates\myapp\login.html:164
-msgid "課程衝堂：在已選課表頁面，時段衝突的課程會顯示紅色"
-msgstr "コースの重複：登録済みコース表ページで時間帯が重なるコースは赤色で表示されます。"
+msgid "課程衝堂：在加選時，若時段衝突會出現衝堂提醒"
+msgstr "コースのスケジュール変更: オプションを追加する際、タイムスロットが競合する場合は、スケジュール変更のリマインダーが表示されます。"
 
 #: .\myapp\templates\myapp\login.html:167
 msgid "課程退選"
@@ -268,20 +268,25 @@ msgid "節次"
 msgstr "時限"
 
 #: .\myapp\templates\myapp\selected_courses.html:151
-msgid "星期一"
+msgid "星期"
+msgstr " "
+msgid "一"
 msgstr "月曜日"
-msgid "星期二"
+msgid "二"
 msgstr "火曜日"
-msgid "星期三"
+msgid "三"
 msgstr "水曜日"
-msgid "星期四"
+msgid "四"
 msgstr "木曜日"
-msgid "星期五"
+msgid "五"
 msgstr "金曜日"
-msgid "星期六"
+msgid "六"
 msgstr "土曜日"
-msgid "星期日"
+msgid "日"
 msgstr "日曜日"
+
+msgid "使用者名稱或密碼錯誤"
+msgstr "8789"
 
 #: .\myapp\templates\myapp\selected_courses.html:167
 msgid "無課程"

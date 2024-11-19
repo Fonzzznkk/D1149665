@@ -10,6 +10,7 @@ from .models import Student,Curriculum,Course
 from django.http import JsonResponse
 from collections import defaultdict
 from django.utils import translation
+from django.contrib import messages  # 導入消息框架
 from django.conf import settings
 
 def hello_world(request):
@@ -44,7 +45,7 @@ def loginpage(request):
                 pass
             else:
                 # 登录失败
-                response['msg'] = '用户名或者密码错误'
+                response['msg'] = '使用者名稱或密碼錯誤'
                 return HttpResponse(json.dumps(response))
                 pass
         
@@ -231,7 +232,8 @@ def add_course(request, course_id):
     # 從 session 中取得學生的 uid
     uid = request.session.get('uid')
     if not uid:
-        return HttpResponse("請先登入")  # 若未登入，返回提示訊息
+        messages.error(request, "請先登入")  # 添加錯誤提示
+        return redirect('/login')  # 導向登入頁面
 
     # 查找學生和課程的記錄
     student = get_object_or_404(Student, student_id=uid)
@@ -239,59 +241,67 @@ def add_course(request, course_id):
 
     # 檢查是否已經有該課程的記錄，若無則添加
     curriculum_entry, created = Curriculum.objects.get_or_create(student_id=student, course_id=course)
-    
+
     if created:
         # 檢查是否存在衝堂的課程
         conflict_courses = []
-        
+
         # 將新增課程的上課時間取出
         new_course_time = course.time.split('(')  # 假設時間格式為 "(一)06(一)07"
         new_course_slots = set()  # 儲存新加選課程的所有時段
-        
+
         for time_slot in new_course_time:
             if time_slot:
                 day, period = time_slot.split(')')
                 day = day.strip()
                 period = period.strip()
                 new_course_slots.add((day, period))
-        
+
         # 取得學生已選的所有課程
         existing_courses = Curriculum.objects.filter(student_id=student)
-        
+
         # 檢查每個已選課程是否與新加選課程時間衝突
         for entry in existing_courses:
             existing_course = entry.course_id
             existing_course_time = existing_course.time.split('(')
-            
+
             for time_slot in existing_course_time:
                 if time_slot:
                     day, period = time_slot.split(')')
                     day = day.strip()
                     period = period.strip()
-                    
+
                     # 檢查是否存在衝突
                     if (day, period) in new_course_slots:
                         conflict_courses.append(existing_course.name)
                         break  # 若衝堂，則跳出檢查
-                        
+                    
+        
         # 返回結果
-        count = 0
+        count=0
         for i in conflict_courses:
             count+=1
         if count>1:
-            conflict_message = "加選成功，但發現以下課程衝堂：" + ", ".join(conflict_courses)
-            return HttpResponse(conflict_message)
+            messages.warning(
+                request,
+                f"加選成功，但發現以下課程衝堂：{', '.join(conflict_courses)}"
+            )
         else:
-            return HttpResponse("成功加選課程")
+            messages.success(request, "成功加選課程")
+
+        # 自動跳轉到課程列表頁
+        return redirect('course_detail', course_id=course_id)
     else:
-        return HttpResponse("課程已加選，無需重複操作")
+        messages.info(request, "課程已加選，無需重複操作")
+        return redirect('course_detail', course_id=course_id)
 
 
 def drop_course(request, course_id):
     # 從 session 中取得學生的 uid
     uid = request.session.get('uid')
     if not uid:
-        return HttpResponse("請先登入")  # 若未登入，返回提示訊息
+        messages.error(request, "請先登入")  # 顯示登入錯誤訊息
+        return redirect('/login')  # 導向登入頁面
 
     # 查找學生和課程的記錄
     student = get_object_or_404(Student, student_id=uid)
@@ -302,11 +312,12 @@ def drop_course(request, course_id):
     
     if curriculum_entry.exists():
         curriculum_entry.delete()
-        message = "成功退選課程"
+        messages.success(request, "成功退選課程")
     else:
-        message = "未選此課程，無法退選"
+        messages.info(request, "未選此課程，無法退選")
     
-    return HttpResponse(message)
+    # 返回課程詳細頁面
+    return redirect('course_detail', course_id=course_id)
 
 def switch_language(request, language):
     translation.activate(language)

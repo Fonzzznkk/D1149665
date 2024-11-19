@@ -27,8 +27,17 @@ msgstr "Selected Courses"
 msgid "課程搜尋"
 msgstr "Course Search"
 
+msgid "成功加選課程"
+msgstr "Successfully added courses"
+
+msgid "確定要加選這門課程嗎？"
+msgstr "Are you sure you want to take this course?"
+
 msgid "加選"
 msgstr "Add Course"
+
+msgid "確定要退選這門課程嗎？"
+msgstr "Are you sure you want to withdraw from this course?"
 
 msgid "退選"
 msgstr "Drop Course"
@@ -171,8 +180,8 @@ msgstr "Course Add"
 msgid "加選方式：在課程詳細資訊頁面點擊加選按鈕，確認加選會導向已選課表頁面"
 msgstr "Add Course: In the course details page, click the add button to confirm adding the course, which will lead to the selected course list page."
 
-msgid "課程衝堂：在已選課表頁面，時段衝突的課程會顯示紅色"
-msgstr "Course Conflict: In the selected course list page, courses with time conflicts will be displayed in red."
+msgid "課程衝堂：在加選時，若時段衝突會出現衝堂提醒"
+msgstr "Course rescheduling: When adding an option, a rescheduling reminder will appear if the time slot conflicts."
 
 msgid "課程退選"
 msgstr "Course Drop"
@@ -186,53 +195,32 @@ msgstr "© Developer: Software Engineering Development Practice Group 5"
 msgid "節次"
 msgstr "Period"
 
-msgid "星期"
-msgstr "Weekday"
-
 msgid "無課程"
 msgstr "No course"
 
 msgid "課程資料未找到"
 msgstr "Course data not found"
 
-msgid "星期一"
-msgstr "Monday"
-
-msgid "星期二"
-msgstr "Tuesday"
-
-msgid "星期三"
-msgstr "Wednesday"
-
-msgid "星期四"
-msgstr "Thursday"
-
-msgid "星期五"
-msgstr "Friday"
-
-msgid "星期六"
-msgstr "Saturday"
-
-msgid "星期日"
-msgstr "Sunday"
+msgid "星期"
+msgstr " "
 
 msgid "一"
-msgstr " One"
+msgstr "Mon"
 
 msgid "二"
-msgstr " Two"
+msgstr "Tue"
 
 msgid "三"
-msgstr " Three"
+msgstr "Wed"
 
 msgid "五"
-msgstr " Five"
+msgstr "Fri"
 
 msgid "六"
-msgstr " Six"
+msgstr "Sat"
 
 msgid "四"
-msgstr " Four"
+msgstr "Thu"
 
 msgid "日"
-msgstr " Seven"
+msgstr "Sun"
