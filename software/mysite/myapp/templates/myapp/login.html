@@ -59,10 +59,18 @@
             color: white;
             justify-content: center;
         }
+        /*語言*/
+        .language {
+            position: relative;
+            left: 1%;
+            border: solid;
+            padding: 5px;
+        }
         .language a {
             color: blue;
             text-decoration: none;
             font-weight: bold;
+            transition: 0.3s;
         }
         .language a:hover {
             color: red;
@@ -70,59 +78,60 @@
         /*頁中*/
         .container {
             display: flex;
+            height: auto;
         }
         /*登入框*/
         .login-form {
+            position: relative;
+            left: 2%;
+            text-align: center;
             background-color: white;
             border: solid;
-            border-collapse: collapse;
-            border-radius: 8px;
-            margin-right: auto;
-            margin-left: 20px;
+            border-radius: 8%;
             width: 300px;
+            height: 250px;
             padding: 40px;
         }
         .login-form h1 {
-            text-align: center;
-            font-size: 30px;
             color: gray;
         }
         .login-form input {
             border: 2px solid lightgray;
             border-radius: 5px;
-            width: 275px;
+            width: 250px;
             font-size: 16px;
             padding: 10px;
             margin: 10px 0;
-            transition: border 0.3s;
+            transition: 0.3s;
         }
         .login-form input:focus {
-            border-color: black;
+            border-color: #007bff;
             outline: none;
         }
         .login-form button {
-            width: 100%;
+            width: 275px;
             padding: 10px;
             background-color: #007bff;
             border: none;
             border-radius: 5px;
             color: white;
-            font-size: 1.1em;
+            font-size: 18px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: 0.3s;
         }
         .login-form button:hover {
             background-color: #0056b3;
         }
         /*操作說明*/
         .announcement {
+            position: relative;
+            left: 5%;
             background-color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             border-collapse: collapse;
             border: solid;
             width: 800px;
-            margin-right: 20px;
-            margin-left: auto;
+            
         }
         .announcement h1 {
             text-align: center;
@@ -131,7 +140,7 @@
         /*頁尾*/
         .footer {
             position: absolute;
-            top: 95%;
+            bottom: 2%;
             left: 0;
             right: 0;
             text-align: center;
