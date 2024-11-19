@@ -126,3 +126,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< Updated upstream
+=======
+
+LANGUAGE_CODE = 'zh-hant'  # 默認語言為繁體中文
+LANGUAGES = [
+    ('en', 'English'),
+    ('zh-hant', '中文'),
+    ('jp', 'Japanese'),
+]
+
+
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+>>>>>>> Stashed changes
