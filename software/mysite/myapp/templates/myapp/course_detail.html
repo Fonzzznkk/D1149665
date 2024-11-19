@@ -97,7 +97,8 @@
     <div class="func selected" onclick="window.location.href='/myapp/selected_courses/'"> {% trans "已選課表" %} </div>
     <div class="func search" onclick="window.location.href='/myapp/coursesearch/'"> {% trans "課程搜尋" %} </div>
     <a href="{% url 'switch_language' 'zh-hant' %}">中文</a> |
-    <a href="{% url 'switch_language' 'en' %}">English</a>
+    <a href="{% url 'switch_language' 'en' %}">English</a> |
+    <a href="{% url 'switch_language' 'ja' %}">japanese</a>
     <div class="container">
         <h1> {{ course.name }} </h1>
         <div class="button">

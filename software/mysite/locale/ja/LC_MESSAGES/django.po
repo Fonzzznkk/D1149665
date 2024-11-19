@@ -1,0 +1,280 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-19 16:13+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\myapp\templates\myapp\course_detail.html:96
+#: .\myapp\templates\myapp\coursesearch.html:104
+#: .\myapp\templates\myapp\selected_courses.html:144
+msgid "回首頁"
+msgstr "ホームへ戻る"
+
+#: .\myapp\templates\myapp\course_detail.html:97
+#: .\myapp\templates\myapp\coursesearch.html:105
+#: .\myapp\templates\myapp\homepage.html:161
+#: .\myapp\templates\myapp\selected_courses.html:137
+msgid "已選課表"
+msgstr "登録済みのコース表"
+
+#: .\myapp\templates\myapp\course_detail.html:98
+msgid "課程搜尋"
+msgstr "コース検索"
+
+#: .\myapp\templates\myapp\course_detail.html:104
+msgid "確定要加選這門課程嗎？"
+msgstr "このコースを追加登録しますか？"
+
+#: .\myapp\templates\myapp\course_detail.html:104
+msgid "加選"
+msgstr "追加登録"
+
+#: .\myapp\templates\myapp\course_detail.html:105
+msgid "確定要退選這門課程嗎？"
+msgstr "このコースを削除しますか？"
+
+#: .\myapp\templates\myapp\course_detail.html:105
+msgid "退選"
+msgstr "削除"
+
+#: .\myapp\templates\myapp\course_detail.html:107
+msgid "開課系所:"
+msgstr "提供部門："
+
+#: .\myapp\templates\myapp\course_detail.html:108
+msgid "上課時間:"
+msgstr "授業時間："
+
+#: .\myapp\templates\myapp\course_detail.html:109
+msgid "授課教師:"
+msgstr "講師："
+
+#: .\myapp\templates\myapp\course_detail.html:110
+msgid "授課語言:"
+msgstr "授業言語："
+
+#: .\myapp\templates\myapp\course_detail.html:111
+msgid "課程類型:"
+msgstr "コースタイプ："
+
+#: .\myapp\templates\myapp\course_detail.html:112
+msgid "課程資訊:"
+msgstr "コース情報："
+
+#: .\myapp\templates\myapp\coursesearch.html:97
+#: .\myapp\templates\myapp\homepage.html:162
+#: .\myapp\templates\myapp\selected_courses.html:145
+msgid "課程查詢"
+msgstr "コース検索"
+
+#: .\myapp\templates\myapp\coursesearch.html:100
+#: .\myapp\templates\myapp\homepage.html:155
+#: .\myapp\templates\myapp\selected_courses.html:140
+msgid "目前帳號"
+msgstr "現在のアカウント"
+
+#: .\myapp\templates\myapp\coursesearch.html:101
+#: .\myapp\templates\myapp\homepage.html:156
+#: .\myapp\templates\myapp\selected_courses.html:141
+msgid "姓名:"
+msgstr "氏名："
+
+#: .\myapp\templates\myapp\coursesearch.html:102
+#: .\myapp\templates\myapp\homepage.html:157
+#: .\myapp\templates\myapp\selected_courses.html:142
+msgid "學號:"
+msgstr "学籍番号："
+
+#: .\myapp\templates\myapp\coursesearch.html:115
+msgid "搜尋課程名稱"
+msgstr "コース名検索"
+
+#: .\myapp\templates\myapp\coursesearch.html:117
+msgid "課程名稱"
+msgstr "コース名"
+
+#: .\myapp\templates\myapp\coursesearch.html:124
+msgid "搜尋課程代碼"
+msgstr "コースコード検索"
+
+#: .\myapp\templates\myapp\coursesearch.html:126
+msgid "課程代碼"
+msgstr "コースコード"
+
+#: .\myapp\templates\myapp\coursesearch.html:133
+msgid "搜尋開課系所"
+msgstr "開講部門検索"
+
+#: .\myapp\templates\myapp\coursesearch.html:135
+msgid "開課系所"
+msgstr "開講部門"
+
+#: .\myapp\templates\myapp\coursesearch.html:142
+msgid "搜尋修課時段"
+msgstr "授業時間検索"
+
+#: .\myapp\templates\myapp\coursesearch.html:144
+#: .\myapp\templates\myapp\coursesearch.html:192
+msgid "修課時段"
+msgstr "授業時間"
+
+#: .\myapp\templates\myapp\coursesearch.html:151
+msgid "搜尋授課教師"
+msgstr "講師検索"
+
+#: .\myapp\templates\myapp\coursesearch.html:153
+#: .\myapp\templates\myapp\coursesearch.html:190
+msgid "授課教師"
+msgstr "講師"
+
+#: .\myapp\templates\myapp\coursesearch.html:160
+msgid "搜尋授課語言"
+msgstr "授業言語検索"
+
+#: .\myapp\templates\myapp\coursesearch.html:162
+#: .\myapp\templates\myapp\coursesearch.html:190
+msgid "授課語言"
+msgstr "授業言語"
+
+#: .\myapp\templates\myapp\coursesearch.html:169
+msgid "搜尋課程種類"
+msgstr "コースタイプ検索"
+
+#: .\myapp\templates\myapp\coursesearch.html:171
+msgid "課程種類"
+msgstr "コースタイプ"
+
+#: .\myapp\templates\myapp\coursesearch.html:175
+msgid "搜尋"
+msgstr "検索"
+
+#: .\myapp\templates\myapp\coursesearch.html:182
+msgid "搜尋結果"
+msgstr "検索結果"
+
+#: .\myapp\templates\myapp\coursesearch.html:195
+msgid "詳細資訊"
+msgstr "詳細情報"
+
+#: .\myapp\templates\myapp\coursesearch.html:201
+msgid "未找到符合條件的課程。"
+msgstr "条件に一致するコースが見つかりませんでした。"
+
+#: .\myapp\templates\myapp\homepage.html:152
+msgid "首頁"
+msgstr "ホームページ"
+
+#: .\myapp\templates\myapp\homepage.html:158
+msgid "登出"
+msgstr "ログアウト"
+
+#: .\myapp\templates\myapp\homepage.html:165
+msgid "歡迎!"
+msgstr "ようこそ！"
+
+#: .\myapp\templates\myapp\homepage.html:166
+msgid "點選課程查詢以進行選課"
+msgstr "コース検索をクリックしてコース選択を行ってください。"
+
+#: .\myapp\templates\myapp\homepage.html:167
+msgid "點選已選課表以檢視加選課程"
+msgstr "登録済みコース表をクリックして追加したコースを確認してください。"
+
+#: .\myapp\templates\myapp\homepage.html:169
+msgid "開發者：軟體工程開發實務第五組"
+msgstr "開発者：ソフトウェアエンジニアリング実践 第5グループ"
+
+#: .\myapp\templates\myapp\homepage.html:174
+msgid "選課系統將在11/30關閉"
+msgstr "コース選択システムは11月30日に閉じます。"
+
+#: .\myapp\templates\myapp\login.html:139
+msgid "第五組 選課系統"
+msgstr "第5グループ コース選択システム"
+
+#: .\myapp\templates\myapp\login.html:144
+msgid "登入系統"
+msgstr "システムにログイン"
+
+#: .\myapp\templates\myapp\login.html:147
+msgid "學號"
+msgstr "学籍番号"
+
+#: .\myapp\templates\myapp\login.html:148
+msgid "密碼"
+msgstr "パスワード"
+
+#: .\myapp\templates\myapp\login.html:149
+msgid "登入"
+msgstr "ログイン"
+
+#: .\myapp\templates\myapp\login.html:153
+msgid "系統操作說明"
+msgstr "システム操作説明"
+
+#: .\myapp\templates\myapp\login.html:155
+msgid "課程資訊"
+msgstr "コース情報"
+
+#: .\myapp\templates\myapp\login.html:157
+msgid "課程查詢：請先勾選查詢條件，再輸入查詢字詞"
+msgstr "コース検索：条件を選択してから検索語句を入力してください。"
+
+#: .\myapp\templates\myapp\login.html:158
+msgid "課程詳細資訊：點選課程列表中的課程名稱，會導向該課的詳細資訊頁面"
+msgstr "コース詳細情報：コースリストのコース名をクリックすると、詳細ページに移動します。"
+
+#: .\myapp\templates\myapp\login.html:161
+msgid "課程加選"
+msgstr "コース追加"
+
+#: .\myapp\templates\myapp\login.html:163
+msgid "加選方式：在課程詳細資訊頁面點擊加選按鈕，確認加選會導向已選課表頁面"
+msgstr "追加方法：コース詳細情報ページで「追加」ボタンをクリックし、確認すると登録済みコース表に移動します。"
+
+#: .\myapp\templates\myapp\login.html:164
+msgid "課程衝堂：在已選課表頁面，時段衝突的課程會顯示紅色"
+msgstr "コースの重複：登録済みコース表ページで時間帯が重なるコースは赤色で表示されます。"
+
+#: .\myapp\templates\myapp\login.html:167
+msgid "課程退選"
+msgstr "コース削除"
+
+#: .\myapp\templates\myapp\login.html:169
+msgid "退選方式：在已選課表頁面點擊課程後點選退選按鈕，確認退選會導回已選課表頁面"
+msgstr "削除方法：登録済みコース表ページでコースをクリックし、「削除」ボタンをクリックして確認すると登録済みコース表に戻ります。"
+
+#: .\myapp\templates\myapp\login.html:174
+#: .\myapp\templates\myapp\selected_courses.html:176
+msgid "© 開發者：軟體工程開發實務第五組"
+msgstr "© 開発者：ソフトウェアエンジニアリング実践 第5グループ"
+
+#: .\myapp\templates\myapp\selected_courses.html:149
+msgid "節次"
+msgstr "時限"
+
+#: .\myapp\templates\myapp\selected_courses.html:151
+msgid "星期"
+msgstr "曜日"
+
+#: .\myapp\templates\myapp\selected_courses.html:167
+msgid "無課程"
+msgstr "コースがありません。"
+
+#: .\myapp\templates\myapp\selected_courses.html:192
+msgid "課程資料未找到"
+msgstr "コースデータが見つかりませんでした。"
