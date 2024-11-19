@@ -60,15 +60,18 @@
             color: white;
             justify-content: center;
         }
+        /*語言*/
         .language {
             position: relative;
             left: 1%;
             border: solid;
+            padding: 5px;
         }
         .language a {
             color: blue;
             text-decoration: none;
             font-weight: bold;
+            transition: 0.3s;
         }
         .language a:hover {
             color: red;
@@ -82,7 +85,7 @@
             border-collapse: collapse;
             border-radius: 8px;
             width: 200px;
-            height: 120px;
+            height: 130px;
             text-align: center;
         }
         .account p {
@@ -97,7 +100,7 @@
         /*登出*/
         .logout {
             position: relative;
-            top: 5%;
+            top: 6%;
             margin: 0 auto;
             color: white;
             font-size: 14px;
@@ -114,13 +117,13 @@
         }
         .button {
             position: absolute;
-            top: 19%;
+            top: 18%;
             text-align: center;
             color: white;
             font-size: 16px;
             font-weight: bold;
             background-color: #007bff;
-            width: 100px;
+            width: 110px;
             padding: 15px;
             border: none;
             border-radius: 8px;
@@ -149,7 +152,7 @@
         /*頁尾*/
         .footer {
             position: absolute;
-            top: 95%;
+            bottom: 2%;
             left: 0;
             right: 0;
             text-align: center;
@@ -183,7 +186,7 @@
         <h1>{% trans "點選課程查詢以進行選課" %}</h1>
         <h1>{% trans "點選已選課表以檢視加選課程" %}</h1>
     </div>
-    <div class="footer"> {% trans "開發者：軟體工程開發實務第五組" %} </div>
+    <div class="footer"> © 開發者：軟體工程開發實務第五組 </div>
     <script>
         // 當頁面載入時彈出提醒
         
