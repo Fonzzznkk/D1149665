@@ -12,10 +12,17 @@
             margin: 0;
         }
         /*語言*/
+        .language {
+            position: absolute;
+            left: 1%;
+            border: solid;
+            padding: 5px;
+        }
         .language a {
             color: blue;
             text-decoration: none;
             font-weight: bold;
+            transition: 0.3s;
         }
         .language a:hover {
             color: red;
@@ -24,13 +31,15 @@
         .func {
             position: absolute;
             top: 2%;
+            display: flex;
             text-align: center;
+            justify-content: center; 
             align-items: center;
+            width: 110px;
+            height: 55px;
             color: white;
             font-weight: bold;
             background-color: #007bff;
-            width: 70px;
-            padding: 15px;
             border-radius: 8px;
             transition: 0.3s;
             cursor: pointer;
@@ -45,11 +54,11 @@
         }
         /*已選課表*/
         .selected {
-            right: 11%;
+            right: 12%;
         }
         /*課程查詢*/
         .search {
-            right: 20%;
+            right: 22%;
         }
         /*課程資訊*/
         .container {
@@ -63,8 +72,8 @@
         .container h1 {
             position: relative;
             text-align: center;
-            width: auto;
-            margin: 0;
+            width: fit-content;
+            margin: 0 auto;
         }
         .button {
             position: relative;
