@@ -268,8 +268,20 @@ msgid "節次"
 msgstr "時限"
 
 #: .\myapp\templates\myapp\selected_courses.html:151
-msgid "星期"
-msgstr "曜日"
+msgid "星期一"
+msgstr "月曜日"
+msgid "星期二"
+msgstr "火曜日"
+msgid "星期三"
+msgstr "水曜日"
+msgid "星期四"
+msgstr "木曜日"
+msgid "星期五"
+msgstr "金曜日"
+msgid "星期六"
+msgstr "土曜日"
+msgid "星期日"
+msgstr "日曜日"
 
 #: .\myapp\templates\myapp\selected_courses.html:167
 msgid "無課程"
