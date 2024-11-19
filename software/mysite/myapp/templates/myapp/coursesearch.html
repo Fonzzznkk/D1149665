@@ -14,10 +14,11 @@
         }
         /*頁首*/
         .header {
+            all: unset;
+            background: linear-gradient(to right, #80bdff, #007bff);
             height: 100px;
             display: flex;
             align-items: center;
-            background: linear-gradient(to right, #80bdff, #007bff);
         }
         .header h1 {
             margin-right: 30px;
@@ -25,6 +26,14 @@
             color: white;
             font-size: 32px;
             font-weight: bold;
+        }
+        .language a {
+            color: blue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .language a:hover {
+            color: red;
         }
         /*帳號資訊*/
         .account {
@@ -92,9 +101,11 @@
 <body>
     {% load i18n %}
     <div class="header">
-        <a href="{% url 'switch_language' 'zh-hant' %}">中文</a> |
-        <a href="{% url 'switch_language' 'en' %}">English</a> |
-        <a href="{% url 'switch_language' 'ja' %}">japanese</a>
+        <div class="language">
+            <a href="{% url 'switch_language' 'zh-hant' %}"> 中文 </a> |
+            <a href="{% url 'switch_language' 'en' %}"> English </a> |
+            <a href="{% url 'switch_language' 'ja' %}"> 日本語 </a>
+        </div>
         <h1>{% trans "課程查詢" %}</h1>
     </div>
     <div class="account">
