@@ -84,6 +84,9 @@ msgstr "Name:"
 msgid "學號:"
 msgstr "Student ID:"
 
+msgid "學號"
+msgstr "Student ID"
+
 msgid "登出"
 msgstr "Logout"
 
