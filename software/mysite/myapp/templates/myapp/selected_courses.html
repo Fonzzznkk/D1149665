@@ -138,8 +138,8 @@
         }
         /*頁尾*/
         .footer {
-            position: absolute;
-            top: 1050px;
+            position: relative;
+            top: 115px;
             left: 0;
             right: 0;
             text-align: center;
@@ -196,7 +196,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <div class="footer">{% trans "© 開發者：軟體工程開發實務第五組" %}</div>
+    <div class="footer"> © 開發者：軟體工程開發實務第五組</div>
     <script>
         function sendCourse(courseName) {
             fetch("{% url 'course_detail_redirect' %}", {
